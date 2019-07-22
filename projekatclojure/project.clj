@@ -10,6 +10,7 @@
                  [selmer "1.10.7"]
                  [ring-server "0.4.0"]
                  [org.clojure/java.jdbc "0.6.1"]
+                 [org.clojure/clojurescript "0.0-3165"]
                  [mysql/mysql-connector-java "5.1.6"]
                  [liberator "0.10.0"]
                  [ring/ring-json "0.4.0"]
@@ -30,14 +31,26 @@
                  [yogthos/config "1.1.1"]
                  [clj-http "3.9.1"]
                  [cheshire "5.8.1"]
-                 [http-kit "2.2.0"]]
-  
+                 [http-kit "2.2.0"]]  
+  :require [config.core :refer [env]]  
+  :jvm-opts ["-Dconf=dev-config.edn"]  
   :plugins [[lein-ring "0.8.12"]
-            [migratus-lein "0.4.1"]]
-  
-  :main projekatclojure.app
-  :ring {:handler projekatclojure.app/app}
-  
+            [migratus-lein "0.4.1"]]  
+  :migratus {:store         :database
+             :migration-dir "migrations"
+             :db            (clojure.edn/read-string (slurp "config.edn"))}
+
+  :ring {:handler projekatclojure.app/app
+         :init projekatclojure.app/init
+         :destroy projekatclojure.app/destroy}  
   :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.2"]]}})
+  {:production
+			  {:ring
+			   {:open-browser? false, :stacktraces? false, :auto-reload? false}}
+   :dev {:dependencies [[javax.servlet/servlet-api "2.5"]
+                        [ring/ring-mock "0.3.2"]
+                        [figwheel "0.2.5"]
+												[com.cemerick/piggieback "0.2.0"]
+												[org.clojure/tools.nrepl "0.2.10"]
+												[weasel "0.6.0"]
+                       ]}})

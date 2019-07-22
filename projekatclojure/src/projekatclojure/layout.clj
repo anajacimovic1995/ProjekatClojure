@@ -1,28 +1,29 @@
 (ns projekatclojure.layout
-    (:require [selmer.parser :as parser]
-            [buddy.auth :refer [authenticated?]]
-            [ring.util.http-response :refer [content-type ok]]
-            [ring.util.anti-forgery :refer [anti-forgery-field]]
-            [ring.middleware.anti-forgery :refer [*anti-forgery-token*]]))
+    (:use projekatclojure.app
+        ring.server.standalone
+        [ring.middleware file-info file]))
 
-(parser/set-resource-path! (clojure.java.io/resource "views"))
-(parser/add-tag! :csrf-field (fn [_ _] (anti-forgery-field)))
-(parser/cache-off!)
+(defonce server (atom nil))
 
-(defn is-admin? [session]
-  (and (authenticated? session)
-       (= true (:admin (:identity session)))))
+(defn get-handler []
 
-(defn is-authenticated? [session]
-  (authenticated? session))
+  (-> #'app
+    (wrap-file "resources")
+    (wrap-file-info)))
 
-(defn render
-  [template & [params]]
-  (content-type
-    (ok
-      (parser/render-file
-        template
-        (assoc params
-          :page template
-          :csrf-token *anti-forgery-token*)))
-    "text/html; charset=utf-8"))
+(defn start-server
+  "used for starting the server in development mode from REPL"
+  [& [port]]
+  (let [port (if port (Integer/parseInt port) 8080)]
+    (reset! server
+            (serve (get-handler)
+                   {:port port
+                    :init init
+                    :auto-reload? true
+                    :destroy destroy
+                    :join true}))
+    (println (str "You can view the site at http://localhost:" port))))
+
+(defn stop-server []
+  (.stop @server)
+  (reset! server nil))
