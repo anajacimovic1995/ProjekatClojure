@@ -12,6 +12,7 @@
             [selmer.parser :refer :all]
             [projekatclojure.routes.home :refer [home-routes]]
             [projekatclojure.routes.loginregistration :refer [log-routes]]
+            [projekatclojure.routes.userforma :refer [forme-routes]]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.middleware.flash :refer [wrap-flash]]
             [buddy.auth.backends.session :refer [session-backend]]
@@ -47,7 +48,7 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes log-routes app-routes)
+  (-> (routes home-routes log-routes forme-routes app-routes)
       (wrap-json-response)
       (handler/site)
       (wrap-authentication backend)

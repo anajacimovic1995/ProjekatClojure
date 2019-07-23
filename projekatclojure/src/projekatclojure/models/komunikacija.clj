@@ -27,7 +27,7 @@
 
 (defn get-users []
   (k/select user
-  (k/where {:role "user"})))
+  (k/where {:rola "obican"})))
 
 (defn update-user [params]
   (k/update user
