@@ -38,7 +38,7 @@
             [migratus-lein "0.4.1"]]  
   :migratus {:store         :database
              :migration-dir "migrations"
-             :db            (clojure.edn/read-string (slurp "config.edn"))}
+             :db            (clojure.edn/read-string (slurp "migratus-config.edn"))}
 
   :ring {:handler projekatclojure.app/app
          :init projekatclojure.app/init
