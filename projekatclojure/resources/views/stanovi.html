@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	body {
+		  margin: 0;
+		}
+		
+		ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		  width: 25%;
+		  background-color: #f1f1f1;
+		  position: fixed;
+		  height: 100%;
+		}
+		
+		li a {
+		  display: block;
+		  color: #000;
+		  padding: 8px 16px;
+		  text-decoration: none;
+		}
+		
+		li a.active {
+		  background-color: #4CAF50;
+		}
+		
+		li a:hover:not(.active) {
+		  background-color: #555;
+		  color: white;
+		}
+		.table{
+		    display:table;
+		    width:100%;
+		    height:100%;
+		}
+		.table-cell{
+		    vertical-align:middle;
+		/*     padding: 5px 0; */
+		    background: #2f6818;
+		    text-align: center;
+		    margin: 0 0 0px 0;
+		    font-size: 16px;
+		    color: white;
+		}
+   </style>
+	
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+   <title>Stanovi</title>
+   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+   <link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Bevan' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+ 
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <meta charset="ISO-8859-1">
+
+</head>
+<body>
+        <div class="navigation">
+            <ul class="nav1">
+                <li><a href="/">HOME</a></li>
+                <li class="dropdown">
+
+                        <li><a href="/stanovi">Raspolozivi stanovi</a></li>
+                        <li><a href="/projekti">Projekti</a></li>
+                        <li><a href="/filter">Postavi filtere</a></li>
+                        <li><a href="/favoriti">Izdvojeni stanovi</a></li>
+
+            </ul>
+            <script>
+                $("span.menu").click(function() {
+                    $("ul.nav1").slideToggle(300, function() {});
+                });
+            </script>
+        </div>
+		<h3>Welcome {{logged.imePrezime}}</h3>
+		{% for s in stanovi %}
+		<div class="square">
+		   <div class="content-pic">
+		        <div class="table">
+		        	<div class="table-cell">
+		                {{s.stanID}}
+		            </div>
+		            <div class="table-cell">
+		                {{s.sajt}}
+		            </div>
+		            <div class="table-cell">
+		                {{s.lokacija}}
+		            </div>
+		            <div class="table-cell">
+		                {{s.vime}}
+		            </div>
+		            <div class="table-cell">
+		                {{s.kvadratura}}
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		{% endfor %}
+</body>
+</html>

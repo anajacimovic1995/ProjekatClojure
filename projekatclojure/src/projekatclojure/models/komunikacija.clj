@@ -41,7 +41,9 @@
   (k/table :stan))
 
 (defn get-stan []
-  (k/select stan))
+  (k/select stan
+          (k/fields :* [:vlasnik.imePrezime :vime])
+          (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID) )))
 
 (defn add-stan [params]
   (k/insert stan
@@ -53,7 +55,9 @@
 
 (defn find-stan [params]
   (k/select stan
-            (k/where params)))
+          (k/fields :* [:vlasnik.imePrezime :vime])
+          (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID))
+          (k/where params)))
 
 (k/defentity projekat
   (k/table :projekat))

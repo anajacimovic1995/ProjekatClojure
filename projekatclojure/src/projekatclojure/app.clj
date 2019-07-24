@@ -13,7 +13,8 @@
             [projekatclojure.routes.home :refer [home-routes]]
             [projekatclojure.routes.loginregistration :refer [log-routes]]
             [projekatclojure.routes.userforma :refer [forme-routes]]
-            [projekatclojure.routes.projekat :refer [projekat-routes]]            
+            [projekatclojure.routes.projekat :refer [projekat-routes]]    
+            [projekatclojure.routes.stan :refer [stan-routes]]    
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.middleware.flash :refer [wrap-flash]]
             [buddy.auth.backends.session :refer [session-backend]]
@@ -49,7 +50,7 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes log-routes forme-routes projekat-routes app-routes)
+  (-> (routes home-routes log-routes forme-routes projekat-routes stan-routes app-routes)
       (wrap-json-response)
       (handler/site)
       (wrap-authentication backend)
