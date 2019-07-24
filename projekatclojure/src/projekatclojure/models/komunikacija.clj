@@ -33,3 +33,15 @@
   (k/update user
             (k/set-fields params)
             (k/where {:id (:id params)})))
+
+(k/defentity stan
+  (k/table :stan))
+
+(k/defentity projekat
+  (k/table :projekat))
+
+(defn get-projekat []
+  (k/select projekat))
+
+(k/defentity favorit
+  (k/table :favorit))

@@ -55,7 +55,7 @@
       (wrap-authorization backend)
       (wrap-base-url)
       (wrap-trace :header :ui)
-      (wrap-resource "public")))
+      (wrap-resource "images")))
 
 
 

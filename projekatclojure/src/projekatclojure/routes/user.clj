@@ -1,2 +1,0 @@
-(ns projekatclojure.routes.user)
-

@@ -1,0 +1,27 @@
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <a href="/"><img src="/logo.png" alt="" width="40" height="40"></a>
+        </div>
+        <div class="navigation">
+            <ul class="nav1">
+                <li><a href="/">HOME</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pristupi nalogu<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/login">Logovanje</a></li>
+                        <li><a href="/registration">Registracija</a></li>
+                        <li><a href="/logout">Izloguj se sa naloga</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <script>
+                $("span.menu").click(function() {
+                    $("ul.nav1").slideToggle(300, function() {});
+                });
+            </script>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
