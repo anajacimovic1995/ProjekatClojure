@@ -6,9 +6,7 @@
             [projekatclojure.models.komunikacija :as db]
             [ring.util.response :refer [redirect]]))
 
-(defn authenticated-admin? [session]
-  (and (authenticated? session)
-       (="admin" (:rola (:identity session)))))
+
 
 (defn get-userforma-page [page session]
   (render-file page
@@ -19,8 +17,6 @@
   (cond
     (not (authenticated? session))
     (redirect "/login")
-    (authenticated-admin? session)
-    (get-userforma-page "views/userForma.html" session)
     :else
     (get-userforma-page "views/userForma.html" session)))
 
