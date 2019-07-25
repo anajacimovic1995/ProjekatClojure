@@ -29,7 +29,7 @@
       (not (login-validation? params))
       (get-login-page "Unesite svoj username i password")
       :else
-      (do (assoc (redirect "/userForma"):session (assoc session :identity user))))))
+      (assoc (redirect "/userForma"):session (assoc session :identity user)))))
 
 (defn logout [request]
   (-> (redirect "/login")
@@ -61,7 +61,7 @@
       (get-registration-page "Please fill out all fields")
 
       :else
-      (assoc (redirect "/userForma"):session (assoc session :identity (add-user-to-db params))))))
+      (assoc (redirect "/login"):session (assoc session :identity (add-user-to-db params))))))
 
 (defroutes log-routes
            (GET "/login" [] (get-login-page))

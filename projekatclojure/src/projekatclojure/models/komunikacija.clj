@@ -22,7 +22,7 @@
 
 (defn delete-user [id]
   (k/delete user
-  (k/where {:id id})))
+  (k/where {:userID id})))
 
 (defn find-user [params]
   (k/select user
@@ -30,7 +30,7 @@
 
 (defn get-users []
   (k/select user
-  (k/where {:rola "obican"})))
+  (k/where {:rola "kupac"})))
 
 (defn update-user [params]
   (k/update user
@@ -51,7 +51,7 @@
 
 (defn delete-stan [id]
   (k/delete stan
-  (k/where {:id id})))
+  (k/where {:stanID id})))
 
 (defn find-stan [params]
   (k/select stan
@@ -73,7 +73,7 @@
 
 (defn delete-projekat [id]
   (k/delete projekat
-  (k/where {:id id})))
+  (k/where {:projekatID id})))
 
 (defn find-projekat [params]
   (k/select projekat
@@ -102,7 +102,9 @@
   (k/table :favorit))
 
 (defn get-favorit []
-  (k/select favorit))
+   (k/select favorit
+          (k/fields :* [:stan.lokacija :slokacija])
+          (k/join stan (= :favorit.stanID :stan.stanID))))
 
 (defn add-favorit [params]
   (k/insert favorit
@@ -110,13 +112,7 @@
 
 (defn delete-favorit [id]
   (k/delete favorit
-  (k/where {:id id})))
-
-(defn find-favorit [params]
-  (k/select favorit
-            (k/where params)))
-
-
+  (k/where {:favoritID id})))
 
 (defn get-vlasnik []
   (k/select vlasnik))
@@ -127,7 +123,7 @@
 
 (defn delete-vlasnik [id]
   (k/delete vlasnik
-  (k/where {:id id})))
+  (k/where {:vlasnikID id})))
 
 (defn find-vlasnik [params]
   (k/select vlasnik
