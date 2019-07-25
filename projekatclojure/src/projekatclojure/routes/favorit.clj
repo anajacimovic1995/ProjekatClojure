@@ -17,7 +17,6 @@
   {:userID [st/required st/number]
    :stanID [st/required st/number]})
 
-
 (defn stan-validation? [params]
   (st/valid? {:userID (read-string (:userID params))
               :stanID (read-string (:stanID params))} favorit-schema))
@@ -31,7 +30,15 @@
 (defn favoriti [session]
     (get-favoriti-page "views/favoriti.html" session))
 
+(defn add-favorit-to-db [favorit]
+  (-> (db/add-favorit favorit)))
+
+
+(defn favorit-page-submit [{:keys [params session]}]
+   (assoc (redirect "/stanovi"):session (add-favorit-to-db params)))
+
+
 (defroutes favorit-routes
-  (GET "/favoriti" request (favoriti (:session request))))  
-  
+  (GET "/favoriti" request (favoriti (:session request)))
+  (POST "/stanovi" request (favorit-page-submit request)))   
   

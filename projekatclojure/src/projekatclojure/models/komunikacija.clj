@@ -28,6 +28,10 @@
   (k/select user
             (k/where params)))
 
+(defn find-user-by-id [params]
+  (k/select user
+            (k/where params)))
+
 (defn get-users []
   (k/select user
   (k/where {:rola "kupac"})))
@@ -58,6 +62,12 @@
           (k/fields :* [:vlasnik.imePrezime :vime])
           (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID))
           (k/where params)))
+
+(defn find-stan-by-id [id]
+  (k/select stan
+          (k/fields :* [:vlasnik.imePrezime :vime])
+          (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID))
+          (k/where {:stanID id})))
 
 (k/defentity projekat
   (k/table :projekat))
