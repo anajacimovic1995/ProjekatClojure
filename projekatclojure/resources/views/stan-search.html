@@ -47,9 +47,41 @@
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <meta charset="ISO-8859-1">
 
+<title>Pretraga stanova</title>
+<script>
+function searchStan(text) {
+    $.ajax({
+        type: "GET",
+        url: "/pretraga",
+        data: {
+            text: text
+        },
+        dataType: 'json',
+        success: function(data) {
+            var tableData = "";
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    tableData += "<tr>";
+                    tableData += "<tr id='" + data[i].id + " class='clickable-row'>";
+                    tableData += "<td>" + data[i].stanID + "</td>";
+                    tableData += "<td>" + data[i].lokacija + "</td>";
+                    tableData += "<td>" + data[i].kvadratura + "</td>";
+                    tableData += "<td>" + data[i].cenaEvri + "</td>";
+                    tableData += "<td>" + data[i].vime + "</td>";
+                    tableData += "<tr>";
+                }
+            }
+            $("#table-stanovi tbody").html(tableData);
+        },
+        error: function(xhr, status, error) {
+            showErrorMessage(xhr.responseText);
+        }
+    });
+}
+</script>
 </head>
 <body>
-        <div class="navigation">
+       <div class="navigation">
             <ul class="nav1">
                 <li><a href="/">HOME</a></li>
                 <li class="dropdown">
@@ -69,6 +101,33 @@
             </script>
         </div>
         <p> Welcome {{logged.userID}}, {{logged.imePrezime}}
- 
+		{% block content %}
+      <div class="row">
+         <div class="col-lg-12">
+           <input type="text" name="search" placeholder="Pretraga ..." onkeyup="searchStan(this.value);" autofocus/>
+           <table id="table-stanovi" class="table">
+            <thead>
+              <th>ID</th>
+              <th>Lokacija</th>
+              <th>Kvadratura</th>
+              <th>Cena</th>
+              <th>Vlasnik</th>
+             </thead>
+             <tbody>
+               {% for s in stanovi %}
+               <tr id="{{s.stanID}}" class="clickable-row">
+               <td>{{s.stanID}}</td>
+               <td>{{s.lokacija}}</td>
+               <td>{{s.kvadratura}}</td>
+               <td>{{s.cenaEvri}}</td>
+               <td>{{s.vime}}</td>
+               </tr>
+               {% endfor %}
+             </tbody>
+           </table>
+         </div>
+      </div>
+{% endblock %}
+
 </body>
 </html>

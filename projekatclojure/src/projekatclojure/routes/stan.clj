@@ -48,5 +48,32 @@
 (defn stanovi [session]
     (get-stanovi-page "views/stanovi.html" session))
 
+(defn get-stanovi [text]
+  (if (or (nil? text)
+          (= "" text))
+    (db/get-stan)
+    (db/search-stan text)))
+
+(defn get-search-stanovi [params session]
+  (render-file "views/stan-search.html" {:title "Search stan"
+                                             :logged (:identity session)
+                                             :beers (get-stanovi nil)}))
+(defresource search-stan [{:keys [params session]}]
+  :allowed-methods [:post]
+  :handle-created (json/write-str (get-stanovi (:text params)))
+  :available-media-types ["application/json"])
+
+(defresource search-stan [{:keys [params session]}]
+  :allowed-methods [:get]
+  :available-media-types ["text/html" "application/json"]
+  :handle-ok #(let [media-type (get-in % [:representation :media-type])]
+                (condp = media-type
+                  "text/html" (get-search-stanovi params session)
+                  "application/json" (->(:text params)
+                                        (get-stanovi)
+                                        (json/write-str)))))
+
+
 (defroutes stan-routes
-  (GET "/stanovi" request (stanovi (:session request))))
+  (GET "/stanovi" request (stanovi (:session request)))  
+  (GET "/pretraga" request (search-stan request)))

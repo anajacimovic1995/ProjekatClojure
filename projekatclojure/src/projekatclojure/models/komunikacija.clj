@@ -49,6 +49,19 @@
           (k/fields :* [:vlasnik.imePrezime :vime])
           (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID) )))
 
+(defn search-stan [text]
+  (k/select stan
+            (k/fields :* [:vlasnik.imePrezime :vime])
+            (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID) )
+            (k/where (or
+                       {:stanID text}
+                       {:sajt text}
+                       {:kvadratura text}
+                       {:cenaEvri text}
+                       {:lokacija text}
+                       {:vlasnik.imePrezime text}))
+            (k/order :stanID :ASC)))
+
 (defn add-stan [params]
   (k/insert stan
   (k/values params)))
