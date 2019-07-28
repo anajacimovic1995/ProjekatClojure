@@ -73,7 +73,21 @@
                                         (get-stanovi)
                                         (json/write-str)))))
 
+(defn get-add-stan-page [session &[message]]
+  (if-not (authenticated? session)
+    (redirect "/vlogin")
+    (render-file "views/stan-add.html" {:title "Add beer"
+                                        :logged (:identity session)})))
+
+(defn add-stan [{:keys [params session]}]
+    (stan-validation? params)
+    (println params)
+    (db/add-stan params)
+    (redirect "/vlasnikForma"))
+
 
 (defroutes stan-routes
   (GET "/stanovi" request (stanovi (:session request)))  
-  (GET "/pretraga" request (search-stan request)))
+  (GET "/pretraga" request (search-stan request))
+ (GET "/addstan" request (get-add-stan-page (:session request)))
+  (POST "/addstan" request (add-stan request)))

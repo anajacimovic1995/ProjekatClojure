@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<style>
+	body {
+		  margin: 0;
+		}
+		
+		ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		  width: 25%;
+		  background-color: #f1f1f1;
+		  position: fixed;
+		  height: 100%;
+		}
+		
+		li a {
+		  display: block;
+		  color: #000;
+		  padding: 8px 16px;
+		  text-decoration: none;
+		}
+		
+		li a.active {
+		  background-color: #4CAF50;
+		}
+		
+		li a:hover:not(.active) {
+		  background-color: #555;
+		  color: white;
+		}
+   </style>
+	
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+   <title>User forma</title>
+   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+   <link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Bevan' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+ 
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <meta charset="ISO-8859-1">
+
+</head>
+<body>
+        <div class="navigation">
+            <ul class="nav1">
+                <li><a href="/">HOME</a></li>
+                <li class="dropdown">
+						<li>Welcome {{logged.imePrezime}}</li>
+                        <li><a href="/addstan">Kreiraj stan</a></li>
+                        <li><a href="/editstan">Azuriraj stan</a></li>
+                        <li><a href="/addprojekat">Kreiraj projekat</a></li>
+                        <li><a href="/editprojekat">Azuriraj projekat</a></li>                 
+                        <li><a href="/vlogout">Izloguj se sa naloga</a></li>
+
+            </ul>
+            <script>
+                $("span.menu").click(function() {
+                    $("ul.nav1").slideToggle(300, function() {});
+                });
+            </script>
+        </div>
+        <p> Welcome {{logged.userID}}, {{logged.imePrezime}}
+ 
+</body>
+</html>

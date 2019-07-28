@@ -18,9 +18,18 @@
   (render-file "views/login.html" {:title "Logovanje"
                                    :error error}))
 
+(defn get-vlasnik-login-page [&[error]]
+  (render-file "views/vlasnik-login.html" {:title "Logovanje vlasnika"
+                                   :error error}))
+
 (defn get-user-by-username-from-db [params]
   (-> (select-keys params [:username])
       (db/find-user)
+      (first)))
+
+(defn get-vlasnik-by-username-from-db [params]
+  (-> (select-keys params [:username])
+      (db/find-vlasnik)
       (first)))
 
 (defn login-page-submit [{:keys [params session]}]
@@ -31,8 +40,20 @@
       :else
       (assoc (redirect "/userForma"):session (assoc session :identity user)))))
 
+(defn vlasnik-login-page-submit [{:keys [params session]}]
+  (let [vlasnik (get-vlasnik-by-username-from-db params)]
+    (cond
+      (not (login-validation? params))
+      (get-vlasnik-login-page "Unesite svoj username i password")
+      :else
+      (assoc (redirect "/vlasnikForma"):session (assoc session :identity vlasnik)))))
+
 (defn logout [request]
   (-> (redirect "/login")
+      (assoc :session {})))
+
+(defn vlasnik-logout [request]
+  (-> (redirect "/vlogin")
       (assoc :session {})))
 
 (def register-schema
@@ -68,4 +89,7 @@
            (POST "/login" request (login-page-submit request))
            (GET "/logout" request (logout request))
            (GET "/registration" [] (get-registration-page))
-           (POST "/registration" request (registration-page-submit request)))
+           (POST "/registration" request (registration-page-submit request))
+           (GET "/vlogin" [] (get-vlasnik-login-page))
+           (POST "/vlogin" request (vlasnik-login-page-submit request))
+           (GET "/vlogout" request (vlasnik-logout request)))

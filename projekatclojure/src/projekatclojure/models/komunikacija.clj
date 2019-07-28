@@ -151,3 +151,7 @@
 (defn find-vlasnik [params]
   (k/select vlasnik
             (k/where params)))
+
+(defn find-vlasnik-by-id [params]
+  (k/select vlasnik
+            (k/where params)))

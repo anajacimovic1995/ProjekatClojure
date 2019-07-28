@@ -4,9 +4,22 @@
             [compojure.response :refer [render]]
             [buddy.auth :refer [authenticated?]]
             [projekatclojure.models.komunikacija :as db]
-            [ring.util.response :refer [redirect]]))
+            [ring.util.response :refer [redirect]]
+            [struct.core :as st]))
 
+(def vlasnik-schema
+  {:imePrezime [st/required st/string]
+   :adresa [st/required st/string]
+   :kontakt [st/required st/string]
+   :username [st/required st/string]
+   :password [st/required st/string]})
 
+(defn vlasnik-validation? [params]
+  (st/valid? {:imePrezime (:imePrezime params)
+              :adresa (:adresa params)
+              :kontakt (:kontakt params)
+              :username (:username params)
+              :password (:password params)} vlasnik-schema))
 
 (defn get-userforma-page [page session]
   (render-file page
@@ -20,5 +33,18 @@
     :else
     (get-userforma-page "views/userForma.html" session)))
 
+(defn get-vlasnikforma-page [page session]
+  (render-file page
+               {:title "Glavna forma vlasnika"
+                :logged (:identity session)}))
+
+(defn vlasnikforma [session]
+  (cond
+    (not (authenticated? session))
+    (redirect "/vlogin")
+    :else
+    (get-vlasnikforma-page "views/vlasnikForma.html" session)))
+
 (defroutes forme-routes
-  (GET "/userForma" request (userforma (:session request))))
+  (GET "/userForma" request (userforma (:session request)))
+  (GET "/vlasnikForma" request (vlasnikforma (:session request))))
