@@ -72,7 +72,7 @@
   (render-file "views/registration.html" {:title "Registrovanje"
                                           :error error}))
 (defn add-user-to-db [params]
-  (-> (db/add-user (assoc params :rola "obican"))))
+  (-> (db/add-user (assoc params :rola "kupac"))))
 
 
 (defn registration-page-submit [{:keys [params session]}]
@@ -84,6 +84,30 @@
       :else
       (assoc (redirect "/login"):session (assoc session :identity (add-user-to-db params))))))
 
+(def vregister-schema
+  [[:imePrezime st/required st/string]
+   [:adresa st/required st/email]
+   [:kontakt st/required st/email]
+   [:username st/required st/string]
+   [:password st/required st/string]])
+
+(defn vregister-validaton? [params]
+  (st/valid? {:imePrezime (:imePrezime params)
+              :adresa (:adresa params)
+              :kontakt (:kontakt params)
+              :username (:username params)
+              :password (:password params)} vregister-schema))
+
+(defn get-vregistration-page [&[error]]
+  (render-file "views/vregistration.html" {:title "Registrovanje vlasnika"
+                                          :error error}))
+(defn add-vlasnik-to-db [params]
+  (-> (db/add-vlasnik params)))
+
+
+(defn vregistration-page-submit [{:keys [params session]}]
+ (assoc (redirect "/vlogin"):session (assoc session :identity (add-vlasnik-to-db params))))
+
 (defroutes log-routes
            (GET "/login" [] (get-login-page))
            (POST "/login" request (login-page-submit request))
@@ -92,4 +116,6 @@
            (POST "/registration" request (registration-page-submit request))
            (GET "/vlogin" [] (get-vlasnik-login-page))
            (POST "/vlogin" request (vlasnik-login-page-submit request))
-           (GET "/vlogout" request (vlasnik-logout request)))
+           (GET "/vlogout" request (vlasnik-logout request))
+           (GET "/vregistration" [] (get-vregistration-page))
+           (POST "/vregistration" request (vregistration-page-submit request)))
