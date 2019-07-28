@@ -49,11 +49,11 @@
       (assoc (redirect "/vlasnikForma"):session (assoc session :identity vlasnik)))))
 
 (defn logout [request]
-  (-> (redirect "/login")
+  (-> (redirect "/")
       (assoc :session {})))
 
 (defn vlasnik-logout [request]
-  (-> (redirect "/vlogin")
+  (-> (redirect "/")
       (assoc :session {})))
 
 (def register-schema

@@ -28,8 +28,8 @@
               :lokacija (:lokacija params)
               :opis (:opis params)
               :slika (:slika params)
-              :godinaZavrsetka (read-string (:godinaZavrsetka params))
-              :investitorID (read-string (:vlasnik params))} projekat-schema))
+              :godinaZavrsetka (:godinaZavrsetka params)
+              :investitorID (:investitorID params)} projekat-schema))
 
 (defn get-projekti-page [page session]
   (render-file page
@@ -40,5 +40,20 @@
 (defn projekti [session]
     (get-projekti-page "views/projekti.html" session))
 
+(defn get-add-projekat-page [session &[message]]
+  (if-not (authenticated? session)
+    (redirect "/vlogin")
+    (render-file "views/projekat-add.html" {:title "Dodaj projekat"
+                                            :logged (:identity session)})))
+
+(defn add-projekat [{:keys [params session]}]
+    (println params)
+    (projekat-validation? params)
+
+    (db/add-projekat params)
+    (redirect "/vlasnikForma"))
+
 (defroutes projekat-routes
-  (GET "/projekti" request (projekti (:session request))))
+  (GET "/projekti" request (projekti (:session request)))
+  (GET "/addprojekat" request (get-add-projekat-page (:session request)))
+  (POST "/addprojekat" request (add-projekat request)))
