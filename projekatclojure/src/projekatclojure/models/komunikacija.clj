@@ -82,6 +82,11 @@
           (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID))
           (k/where {:stanID id})))
 
+(defn update-stan [params]
+  (k/update stan
+            (k/set-fields params)
+            (k/where {:stanID (:stanID params)})))
+
 (k/defentity projekat
   (k/table :projekat))
 
@@ -136,6 +141,10 @@
 (defn delete-favorit [id]
   (k/delete favorit
   (k/where {:favoritID id})))
+
+(defn delete-favorit-stan [stan]
+  (k/delete favorit
+  (k/where {:stanID stan})))
 
 (defn get-vlasnik []
   (k/select vlasnik))

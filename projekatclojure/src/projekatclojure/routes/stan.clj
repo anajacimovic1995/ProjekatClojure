@@ -91,6 +91,12 @@
                                         (json/write-str)))))
 
 (defresource search-stan-vl [{:keys [params session]}]
+  :allowed-methods [:post]
+  :authenticated? (authenticated? session)
+  :handle-created (json/write-str (get-stanovi-vl (:text params)))
+  :available-media-types ["application/json"])
+
+(defresource search-stan-vl [{:keys [params session]}]
   :allowed-methods [:get]
   :available-media-types ["text/html" "application/json"]
   :handle-ok #(let [media-type (get-in % [:representation :media-type])]
@@ -120,11 +126,26 @@
 (defn get-stan [{:keys [params session]}]
     (get-stan-edit-page "views/edit-stan.html" params session))
 
+(defresource update-stan [{:keys [params session]}]
+  :allowed-methods [:put]
+  :handle-ok (fn [_] (json/write-str {:stan (->(select-keys params [:stanID])
+                                               (db/find-stan)
+                                               (first))})))
+
+(defresource delete-stan [{:keys [params session]}]
+  :allowed-methods [:delete] 
+  (db/delete-favorit-stan (:stanID params))
+  (db/delete-stan (:stanID params))
+  :available-media-types ["application/json"])
+
+
 (defroutes stan-routes
   (GET "/stanovi" request (stanovi (:session request)))  
   (GET "/pretraga" request (search-stan request))
   (GET "/pretragavl" request (search-stan-vl request))
   (GET "/addstan" request (get-add-stan-page (:session request)))
   (POST "/addstan" request (add-stan request))
-  (GET "/stan/:stanID" request (get-stan request)))
+  (GET "/stan/:stanID" request (get-stan request))
+  (PUT "/stan" request (update-stan request))  
+  (DELETE "/stan" request (delete-stan request)))
 
