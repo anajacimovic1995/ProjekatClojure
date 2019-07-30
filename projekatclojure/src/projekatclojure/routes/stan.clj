@@ -54,13 +54,30 @@
     (db/get-stan)
     (db/search-stan text)))
 
+(defn get-stanovi-vl [text]
+  (if (or (nil? text)
+          (= "" text))
+    (db/get-stan)
+    (db/search-stan text)))
+
 (defn get-search-stanovi [params session]
   (render-file "views/stan-search.html" {:title "Search stan"
                                              :logged (:identity session)
                                              :beers (get-stanovi nil)}))
+
+(defn get-search-stanovi-vl [params session]
+  (render-file "views/stan-search-vl.html" {:title "Search stan"
+                                             :logged (:identity session)
+                                             :stanovi (get-stanovi-vl nil)}))
+
 (defresource search-stan [{:keys [params session]}]
   :allowed-methods [:post]
   :handle-created (json/write-str (get-stanovi (:text params)))
+  :available-media-types ["application/json"])
+
+(defresource search-stan-vl [{:keys [params session]}]
+  :allowed-methods [:post]
+  :handle-created (json/write-str (get-stanovi-vl (:text params)))
   :available-media-types ["application/json"])
 
 (defresource search-stan [{:keys [params session]}]
@@ -71,6 +88,16 @@
                   "text/html" (get-search-stanovi params session)
                   "application/json" (->(:text params)
                                         (get-stanovi)
+                                        (json/write-str)))))
+
+(defresource search-stan-vl [{:keys [params session]}]
+  :allowed-methods [:get]
+  :available-media-types ["text/html" "application/json"]
+  :handle-ok #(let [media-type (get-in % [:representation :media-type])]
+                (condp = media-type
+                  "text/html" (get-search-stanovi-vl params session)
+                  "application/json" (->(:text params)
+                                        (get-stanovi-vl)
                                         (json/write-str)))))
 
 (defn get-add-stan-page [session &[message]]
@@ -85,9 +112,19 @@
     (db/add-stan params)
     (redirect "/vlasnikForma"))
 
+(defn get-stan-edit-page [page params session]
+  (render-file page {:title "Stan"
+                     :logged (:identity session)
+                     :stan (first (db/find-stan params))}))
+
+(defn get-stan [{:keys [params session]}]
+    (get-stan-edit-page "views/edit-stan.html" params session))
 
 (defroutes stan-routes
   (GET "/stanovi" request (stanovi (:session request)))  
   (GET "/pretraga" request (search-stan request))
+  (GET "/pretragavl" request (search-stan-vl request))
   (GET "/addstan" request (get-add-stan-page (:session request)))
-  (POST "/addstan" request (add-stan request)))
+  (POST "/addstan" request (add-stan request))
+  (GET "/stan/:stanID" request (get-stan request)))
+

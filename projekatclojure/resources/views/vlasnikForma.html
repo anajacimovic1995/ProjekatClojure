@@ -8,12 +8,12 @@
 		}
 		
 		ul {
+		top: 0;
 		  list-style-type: none;
 		  margin: 0;
 		  padding: 0;
 		  width: 25%;
 		  background-color: #f1f1f1;
-		  position: fixed;
 		  height: 100%;
 		}
 		
@@ -32,6 +32,12 @@
 		  background-color: #555;
 		  color: white;
 		}
+		.navigation {
+		   
+		    top: 0;
+		    width: 100%;
+		}
+		
    </style>
 	
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -49,25 +55,21 @@
 
 </head>
 <body>
-        <div class="navigation">
-            <ul class="nav1">
-                <li><a href="/">HOME</a></li>
-                <li class="dropdown">
-						<li>Welcome {{logged.imePrezime}}</li>
-                        <li><a href="/addstan">Kreiraj stan</a></li>
-                        <li><a href="/editstan">Azuriraj stan</a></li>
-                        <li><a href="/addprojekat">Kreiraj projekat</a></li>
-                        <li><a href="/editprojekat">Azuriraj projekat</a></li>                 
-                        <li><a href="/vlogout">Izloguj se sa naloga</a></li>
-
-            </ul>
+        <div class="navigation">        
+                <a href="/">HOME</a>
+						Welcome {{logged.imePrezime}}
+                        <a href="/addstan">Kreiraj stan</a>
+                        <a href="/pretragavl">Azuriraj stan</a>
+                        <a href="/addprojekat">Kreiraj projekat</a>
+                        <a href="/editprojekat">Azuriraj projekat</a>                
+                        <a href="/vlogout">Izloguj se sa naloga</a>
+        
             <script>
                 $("span.menu").click(function() {
                     $("ul.nav1").slideToggle(300, function() {});
                 });
             </script>
         </div>
-        <p> Welcome {{logged.userID}}, {{logged.imePrezime}}
  
 </body>
 </html>

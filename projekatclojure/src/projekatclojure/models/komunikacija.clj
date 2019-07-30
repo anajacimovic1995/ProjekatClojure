@@ -47,7 +47,7 @@
 (defn get-stan []
   (k/select stan
           (k/fields :* [:vlasnik.imePrezime :vime])
-          (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID) )))
+          (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID))))
 
 (defn search-stan [text]
   (k/select stan

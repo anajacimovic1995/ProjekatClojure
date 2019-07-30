@@ -105,6 +105,7 @@ function searchStan(text) {
       <div class="row">
          <div class="col-lg-12">
            <input type="text" name="search" placeholder="Pretraga ..." onkeyup="searchStan(this.value);" autofocus/>
+           
            <table id="table-stanovi" class="table">
             <thead>
               <th>ID</th>
@@ -120,11 +121,12 @@ function searchStan(text) {
                <td>{{s.lokacija}}</td>
                <td>{{s.kvadratura}}</td>
                <td>{{s.cenaEvri}}</td>
-               <td>{{s.vime}}</td>
+               <td>{{s.vime}}</td>                  
                </tr>
                {% endfor %}
              </tbody>
            </table>
+
          </div>
       </div>
 {% endblock %}
