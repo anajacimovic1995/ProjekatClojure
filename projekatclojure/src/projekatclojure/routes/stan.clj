@@ -127,10 +127,11 @@
     (get-stan-edit-page "views/edit-stan.html" params session))
 
 (defresource update-stan [{:keys [params session]}]
-  :allowed-methods [:put]
-  :handle-ok (fn [_] (json/write-str {:stan (->(select-keys params [:stanID])
-                                               (db/find-stan)
-                                               (first))})))
+  :allowed-methods [:put]  
+  :available-media-types ["application/json"]
+  (println params)
+  (db/update-stan params))
+
 
 (defresource delete-stan [{:keys [params session]}]
   :allowed-methods [:delete] 
