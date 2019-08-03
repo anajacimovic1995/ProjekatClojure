@@ -4,7 +4,15 @@
             [struct.core :as st]
             [ring.util.response :refer [redirect]]
             [selmer.parser :refer [render-file]]
-            [projekatclojure.models.komunikacija :as db]))
+            [projekatclojure.models.komunikacija :as db]
+            [compojure.response :refer [render]]
+            [buddy.auth :refer [authenticated?]]
+            [liberator.core :refer [defresource]]
+            [clojure.data.json :as json]
+            [clojure.java.io :as io]
+            [liberator.representation :refer [ring-response as-response]]
+            [clojure.set :refer [rename-keys]]
+            [clojure.string :as str]))
 
 (def login-schema
   {:username [st/required st/string]
@@ -108,6 +116,27 @@
 (defn vregistration-page-submit [{:keys [params session]}]
  (assoc (redirect "/vlogin"):session (assoc session :identity (add-vlasnik-to-db params))))
 
+(defn get-useri [text]
+  (if (or (nil? text)
+          (= "" text))
+    (db/get-users)
+    (db/search-user text)))
+
+(defn get-search-useri [params session]
+  (render-file "views/useri.html" {:title "Search stan"
+                                             :logged (:identity session)
+                                             :useri (get-useri nil)}))
+
+(defresource search-user [{:keys [params session]}]
+  :allowed-methods [:get]
+  :available-media-types ["text/html" "application/json"]
+  :handle-ok #(let [media-type (get-in % [:representation :media-type])]
+                (condp = media-type
+                  "text/html" (get-search-useri params session)
+                  "application/json" (->(:text params)
+                                        (get-useri)
+                                        (json/write-str)))))
+
 (defroutes log-routes
            (GET "/login" [] (get-login-page))
            (POST "/login" request (login-page-submit request))
@@ -118,4 +147,5 @@
            (POST "/vlogin" request (vlasnik-login-page-submit request))
            (GET "/vlogout" request (vlasnik-logout request))
            (GET "/vregistration" [] (get-vregistration-page))
-           (POST "/vregistration" request (vregistration-page-submit request)))
+           (POST "/vregistration" request (vregistration-page-submit request)) 
+           (GET "/useri" request (search-user request)))

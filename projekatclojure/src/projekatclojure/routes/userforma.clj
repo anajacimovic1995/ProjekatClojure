@@ -21,6 +21,10 @@
               :username (:username params)
               :password (:password params)} vlasnik-schema))
 
+(defn authenticated-admin? [session]
+  (and (authenticated? session)
+       (="admin" (:rola (:identity session)))))
+
 (defn get-userforma-page [page session]
   (render-file page
                {:title "Glavna user forma"
@@ -30,6 +34,8 @@
   (cond
     (not (authenticated? session))
     (redirect "/login")
+    (authenticated-admin? session)
+    (get-userforma-page "views/adminForma.html" session)
     :else
     (get-userforma-page "views/userForma.html" session)))
 
@@ -44,6 +50,11 @@
     (redirect "/vlogin")
     :else
     (get-vlasnikforma-page "views/vlasnikForma.html" session)))
+
+(defresource search-user [{:keys [params session]}]
+  :allowed-methods [:post]
+  :handle-created (json/write-str (get-useri (:text params)))
+  :available-media-types ["application/json"])
 
 (defroutes forme-routes
   (GET "/userForma" request (userforma (:session request)))
