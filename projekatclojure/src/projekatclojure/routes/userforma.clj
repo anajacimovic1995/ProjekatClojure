@@ -5,7 +5,15 @@
             [buddy.auth :refer [authenticated?]]
             [projekatclojure.models.komunikacija :as db]
             [ring.util.response :refer [redirect]]
-            [struct.core :as st]))
+            [struct.core :as st]
+            [compojure.response :refer [render]]
+            [buddy.auth :refer [authenticated?]]
+            [liberator.core :refer [defresource]]
+            [clojure.data.json :as json]
+            [clojure.java.io :as io]
+            [liberator.representation :refer [ring-response as-response]]
+            [clojure.set :refer [rename-keys]]
+            [clojure.string :as str]))
 
 (def vlasnik-schema
   {:imePrezime [st/required st/string]
@@ -51,11 +59,28 @@
     :else
     (get-vlasnikforma-page "views/vlasnikForma.html" session)))
 
-(defresource search-user [{:keys [params session]}]
-  :allowed-methods [:post]
-  :handle-created (json/write-str (get-useri (:text params)))
-  :available-media-types ["application/json"])
+(defn get-vlasnici [text]
+  (if (or (nil? text)
+          (= "" text))
+    (db/get-vlasnik)
+    (db/search-vlasnik text)))
+
+(defn get-search-vlasnici [params session]
+  (render-file "views/vlasnici.html" {:title "Search vlasnik"
+                                             :logged (:identity session)
+                                             :vlasnici (get-vlasnici nil)}))
+
+(defresource search-vlasnik [{:keys [params session]}]
+  :allowed-methods [:get]
+  :available-media-types ["text/html" "application/json"]
+  :handle-ok #(let [media-type (get-in % [:representation :media-type])]
+                (condp = media-type
+                  "text/html" (get-search-vlasnici params session)
+                  "application/json" (->(:text params)
+                                        (get-vlasnici)
+                                        (json/write-str)))))
 
 (defroutes forme-routes
   (GET "/userForma" request (userforma (:session request)))
-  (GET "/vlasnikForma" request (vlasnikforma (:session request))))
+  (GET "/vlasnikForma" request (vlasnikforma (:session request)))
+  (GET "/vlasnici" request (search-vlasnik request)))

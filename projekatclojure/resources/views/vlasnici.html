@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -79,12 +80,12 @@
    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  
    <meta charset="ISO-8859-1">
-	<title>Prikaz korisnika</title>
+	<title>Prikaz vlasnika</title>
 	<script>
-	function searchUser(text) {
+	function searchVlasnik(text) {
 	    $.ajax({
 	        type: "GET",
-	        url: "/useri",
+	        url: "/vlasnici",
 	        data: {
 	            text: text
 	        },
@@ -95,12 +96,12 @@
 	                for (var i = 0; i < data.length; i++) {
 	                    tableData += "<tr>";
 	                    tableData += "<tr id='" + data[i].id + " class='clickable-row'>";
-	                    tableData += "<td>" + data[i].userID + "</td>";
+	                    tableData += "<td>" + data[i].vlasnikID + "</td>";
 	                    tableData += "<td>" + data[i].imePrezime + "</td>";
 	                    tableData += "<td>" + data[i].username + "</td>";
 	                    tableData += "<td>" + data[i].password + "</td>";
-	                    tableData += "<td>" + data[i].email + "</td>";
-	                    tableData += "<td>" + data[i].rola + "</td>";
+	                    tableData += "<td>" + data[i].adresa + "</td>";
+	                    tableData += "<td>" + data[i].kontakt + "</td>";
 	                    tableData += "<tr>";
 	                }
 	            }
@@ -131,26 +132,26 @@
             </script>
         </div>
       <div class="row">
-           <input type="text" name="search" placeholder="Pretraga ..." onkeyup="searchUser(this.value);" autofocus/>
+           <input type="text" name="search" placeholder="Pretraga ..." onkeyup="searchVlasnik(this.value);" autofocus/>
            <table id="table-useri" class="table">
             <thead>
               <th>ID</th>
               <th>Ime i prezime</th>
               <th>Username</th>
               <th>Password</th>
-              <th>Email</th> 
-              <th>Rola</th>              
+              <th>Adresa</th> 
+              <th>Kontakt</th>              
  			 </thead>
  			  
              <tbody>
-              {% for u in useri %}
-               <tr id="{{u.userID}}" onclick="getUser(this.id)" class="clickable-row">
-               <td>{{u.userID}}</td>
-               <td>{{u.imePrezime}}</td>
-               <td>{{u.username}}</td>
-               <td>{{u.password}}</td>
-               <td>{{u.email}}</td>
-               <td>{{u.rola}}</td>                            
+              {% for v in vlasnici %}
+               <tr id="{{v.vlasnikID}}" onclick="getVlasnik(this.id)" class="clickable-row">
+               <td>{{v.vlasnikID}}</td>
+               <td>{{v.imePrezime}}</td>
+               <td>{{v.username}}</td>
+               <td>{{v.password}}</td>
+               <td>{{v.adresa}}</td>
+               <td>{{v.kontakt}}</td>                            
                </tr>
                {% endfor %}
               

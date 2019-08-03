@@ -123,9 +123,14 @@
     (db/search-user text)))
 
 (defn get-search-useri [params session]
-  (render-file "views/useri.html" {:title "Search stan"
+  (render-file "views/useri.html" {:title "Search user"
                                              :logged (:identity session)
                                              :useri (get-useri nil)}))
+
+(defresource search-user [{:keys [params session]}]
+  :allowed-methods [:post]
+  :handle-created (json/write-str (get-useri (:text params)))
+  :available-media-types ["application/json"])
 
 (defresource search-user [{:keys [params session]}]
   :allowed-methods [:get]

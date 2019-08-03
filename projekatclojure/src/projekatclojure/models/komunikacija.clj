@@ -160,6 +160,17 @@
 (defn get-vlasnik []
   (k/select vlasnik))
 
+(defn search-vlasnik [text]
+  (k/select vlasnik
+            (k/where (or
+                       {:vlasnikID text}
+                       {:imePrezime text}
+                       {:adresa text}
+                       {:kontakt text}
+                       {:username text}
+                       {:password text}))
+            (k/order :vlasnikID :ASC)))
+
 (defn add-vlasnik [params]
   (k/insert vlasnik
   (k/values params)))
