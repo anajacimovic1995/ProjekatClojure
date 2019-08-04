@@ -111,6 +111,20 @@
 	        }
 	    });
 	}
+	
+	function deleteUser(userID) {
+	    $.ajax({
+	        type: "DELETE",
+	        url: "/user/" + userID,
+	        data: {
+	        	userID: userID
+	        },
+	        dataType: 'json',
+	        success: function(data) {
+	            window.location = "/useri";
+	        }
+	    });
+	}
 	</script>
 
 </head>
@@ -144,7 +158,7 @@
  			  
              <tbody>
               {% for u in useri %}
-               <tr id="{{u.userID}}" onclick="getUser(this.id)" class="clickable-row">
+               <tr id="{{u.userID}}" onclick="deleteUser(this.id)" class="clickable-row">
                <td>{{u.userID}}</td>
                <td>{{u.imePrezime}}</td>
                <td>{{u.username}}</td>

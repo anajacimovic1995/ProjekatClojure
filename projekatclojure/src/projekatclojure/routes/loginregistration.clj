@@ -142,11 +142,18 @@
                                         (get-useri)
                                         (json/write-str)))))
 
+(defresource delete-user [{:keys [params session]}]
+  :allowed-methods [:delete]  
+  (db/delete-favorit-user (:userID params))
+  (db/delete-user (:userID params))
+  :available-media-types ["application/json"])
+
 (defroutes log-routes
            (GET "/login" [] (get-login-page))
            (POST "/login" request (login-page-submit request))
            (GET "/logout" request (logout request))
            (GET "/registration" [] (get-registration-page))
+           (DELETE "/user/:userID" request (delete-user request))
            (POST "/registration" request (registration-page-submit request))
            (GET "/vlogin" [] (get-vlasnik-login-page))
            (POST "/vlogin" request (vlasnik-login-page-submit request))

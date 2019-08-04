@@ -165,6 +165,10 @@
   (k/delete favorit
   (k/where {:stanID stan})))
 
+(defn delete-favorit-user [user]
+  (k/delete favorit
+  (k/where {:userID user})))
+
 (defn get-vlasnik []
   (k/select vlasnik))
 
