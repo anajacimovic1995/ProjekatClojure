@@ -112,6 +112,20 @@
 	        }
 	    });
 	}
+	
+	function deleteVlasnik(vlasnikID) {
+	    $.ajax({
+	        type: "DELETE",
+	        url: "/vlasnik/" + vlasnikID,
+	        data: {
+	        	vlasnikID: vlasnikID
+	        },
+	        dataType: 'json',
+	        success: function(data) {
+	            window.location = "/vlasnici";
+	        }
+	    });
+	}
 	</script>
 
 </head>
@@ -145,7 +159,7 @@
  			  
              <tbody>
               {% for v in vlasnici %}
-               <tr id="{{v.vlasnikID}}" onclick="getVlasnik(this.id)" class="clickable-row">
+               <tr id="{{v.vlasnikID}}" onclick="deleteVlasnik(this.id)" class="clickable-row">
                <td>{{v.vlasnikID}}</td>
                <td>{{v.imePrezime}}</td>
                <td>{{v.username}}</td>

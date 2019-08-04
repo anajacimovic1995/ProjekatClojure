@@ -81,6 +81,10 @@
   (k/delete stan
   (k/where {:stanID id})))
 
+(defn delete-stan-vlasnik [id]
+  (k/delete stan
+  (k/where {:prodavacID id})))
+
 (defn find-stan [params]
   (k/select stan
           (k/fields :* [:vlasnik.imePrezime :vime])
@@ -110,9 +114,13 @@
   (k/insert projekat
   (k/values params)))
 
-(defn delete-projekat [id]
+(defn delete-projekat [id]  
   (k/delete projekat
   (k/where {:projekatID id})))
+
+(defn delete-projekat-vlasnik [vlasnik]
+  (k/delete projekat
+  (k/where {:investitorID vlasnik})))
 
 (defn find-projekat [params]
   (k/select projekat

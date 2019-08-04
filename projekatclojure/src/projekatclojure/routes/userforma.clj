@@ -80,7 +80,16 @@
                                         (get-vlasnici)
                                         (json/write-str)))))
 
+(defresource delete-vlasnik [{:keys [params session]}]
+  :allowed-methods [:delete] 
+  (println params)
+  (db/delete-stan-vlasnik (:vlasnikID params))
+  (db/delete-projekat-vlasnik (:vlasnikID params))
+  (db/delete-vlasnik (:vlasnikID params))
+  :available-media-types ["application/json"])
+
 (defroutes forme-routes
   (GET "/userForma" request (userforma (:session request)))
   (GET "/vlasnikForma" request (vlasnikforma (:session request)))
-  (GET "/vlasnici" request (search-vlasnik request)))
+  (GET "/vlasnici" request (search-vlasnik request))
+  (DELETE "/vlasnik/:vlasnikID" request (delete-vlasnik request)))
