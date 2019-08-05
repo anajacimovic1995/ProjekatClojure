@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<style>
+	body {
+		  margin: 0;
+		}
+		
+		ul {
+		  list-style-type: none;
+		  margin: 0;
+		  padding: 0;
+		  width: 25%;
+		  background-color: #f1f1f1;
+		  position: fixed;
+		  height: 100%;
+		}
+		
+		li a {
+		  display: block;
+		  color: #000;
+		  padding: 8px 16px;
+		  text-decoration: none;
+		}
+		
+		li a.active {
+		  background-color: #4CAF50;
+		}
+		
+		li a:hover:not(.active) {
+		  background-color: #555;
+		  color: white;
+		}
+		tr:hover { 
+		   background: white; 
+		}
+		td a { 
+		   display: block; 
+		   border: 1px solid black;
+		   padding: 16px; 
+		}
+		.navigation {		   
+		    top: 0;
+		    width: 100%;
+		}
+		
+		.table {
+		  display: table;
+		}
+		
+		.row {
+		  display: table-row;
+		}
+		
+		.cell {
+		  display: table-cell;
+		  padding: 10px;
+		}
+		
+		.row:hover {
+		  background-color: #cccccc;
+		}
+		
+		.cell:hover {
+		  background-color: #e5e5e5;
+		}
+				
+		td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
+		
+
+   </style>
+	
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+   <link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Bevan' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <meta charset="ISO-8859-1">
+	<title>Pretraga projekata</title>
+	<script>
+	function searchProjekat(text) {
+	    $.ajax({
+	        type: "GET",
+	        url: "/pretragaprojekata",
+	        data: {
+	            text: text
+	        },
+	        dataType: 'json',
+	        success: function(data) {
+	            var tableData = "";
+	            if (data != null) {
+	                for (var i = 0; i < data.length; i++) {
+	                    tableData += "<tr>";
+	                    tableData += "<tr id='" + data[i].id + " class='clickable-row'>";
+	                    tableData += "<td>" + data[i].projekatID + "</td>";
+	                    tableData += "<td>" + data[i].tip + "</td>";
+	                    tableData += "<td>" + data[i].naziv + "</td>";
+	                    tableData += "<td>" + data[i].lokacija + "</td>";
+	                    tableData += "<td>" + data[i].opis + "</td>";
+	                    tableData += "<td>" + data[i].slika + "</td>";
+	                    tableData += "<td>" + data[i].vime + "</td>";
+	                    tableData += "<td>" + data[i].godinaZavrsetka + "</td>";
+	                    tableData += "<tr>";
+	                }
+	            }
+	            $("#table-projekti tbody").html(tableData);
+	        },
+	        error: function(xhr, status, error) {
+	            showErrorMessage(xhr.responseText);
+	        }
+	    });
+	}
+	</script>
+	<script>
+	function getProjekat(id) {
+	    window.location = "/projekat/" + id;
+	}
+	</script>
+</head>
+<body>
+	 <div class="navigation">        
+                <a href="/">HOME</a>
+						Welcome {{logged.imePrezime}}
+                        <a href="/addstan">Kreiraj stan</a>
+                        <a href="/pretragavl">Azuriraj stan</a>
+                        <a href="/addprojekat">Kreiraj projekat</a>
+                        <a href="/editprojekat">Azuriraj projekat</a>                
+                        <a href="/vlogout">Izloguj se sa naloga</a>
+        
+            <script>
+                $("span.menu").click(function() {
+                    $("ul.nav1").slideToggle(300, function() {});
+                });
+            </script>
+        </div>
+      <div class="row">
+           <input type="text" name="search" placeholder="Pretraga ..." onkeyup="searchProjekat(this.value);" autofocus/>
+           <table id="table-projekti" class="table">
+            <thead>
+              <th>ID</th>
+              <th>Tip</th>
+              <th>Naziv</th>
+              <th>Lokacija</th>
+              <th>Opis</th> 
+              <th>Slika</th>
+              <th>Investitor</th>
+			  <th>Zavrsetak gradnje</th> 
+ 			 </thead>
+ 			  
+             <tbody>
+              {% for p in projekti %}
+               <tr id="{{p.projekatID}}" onclick="getProjekat(this.id)" class="clickable-row">
+               <td>{{p.projekatID}}</td>
+               <td>{{p.tip}}</td>
+			   <td>{{p.naziv}}</td>
+               <td>{{p.lokacija}}</td>
+               <td>{{p.opis}}</td>
+               <td>{{p.slika}}</td>
+               <td>{{p.vime}}</td> 
+               <td>{{p.zavrsetakGradnje}}</td>                            
+               </tr>
+               {% endfor %}
+              
+             </tbody>
+             </table>  
+         </div>
+
+</body>
+</html>

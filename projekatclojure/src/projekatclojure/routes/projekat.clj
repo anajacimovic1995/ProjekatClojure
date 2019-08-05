@@ -53,7 +53,35 @@
     (db/add-projekat params)
     (redirect "/vlasnikForma"))
 
+(defn get-projekti [text]
+  (if (or (nil? text)
+          (= "" text))
+    (db/get-projekti)
+    (db/search-projekti text)))
+
+(defn get-search-projekti [params session]
+  (render-file "views/projekat-search-vl.html" {:title "Search projekat"
+                                             :logged (:identity session)
+                                             :projekti (get-projekti nil)}))
+
+(defresource search-projekat [{:keys [params session]}]
+  :allowed-methods [:post]
+  :authenticated? (authenticated? session)
+  :handle-created (json/write-str (get-projekti (:text params)))
+  :available-media-types ["application/json"])
+
+(defresource search-projekat [{:keys [params session]}]
+  :allowed-methods [:get]
+  :available-media-types ["text/html" "application/json"]
+  :handle-ok #(let [media-type (get-in % [:representation :media-type])]
+                (condp = media-type
+                  "text/html" (get-search-projekti params session)
+                  "application/json" (->(:text params)
+                                        (get-projekti)
+                                        (json/write-str)))))
+
 (defroutes projekat-routes
   (GET "/projekti" request (projekti (:session request)))
   (GET "/addprojekat" request (get-add-projekat-page (:session request)))
-  (POST "/addprojekat" request (add-projekat request)))
+  (POST "/addprojekat" request (add-projekat request))
+  (GET "/pretragaprojekata" request (search-projekat request)))
