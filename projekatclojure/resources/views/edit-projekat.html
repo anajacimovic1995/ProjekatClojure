@@ -95,7 +95,51 @@
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <meta charset="ISO-8859-1">
-   <title>Kreiraj oglas</title>
+   <title>Izmeni projekat</title>
+        <script>
+
+     function editProjekat() {
+    	 
+		    var params = new FormData();
+		    params.append("projekatID", $("#projekatID").val());
+		    params.append("tip", $("#tip").val());
+		    params.append("naziv", $("#naziv").val());
+		    params.append("lokacija", $("#lokacija").val());
+		    params.append("opis", $("#opis").val());
+		    params.append("slika", $("#slika").val());
+		    params.append("investitorID", $("#investitorID").val());
+		    params.append("godinaZavrsetka", $("#godinaZavrsetka").val());
+		    
+		    $.ajax({
+		        type: "PUT",
+		        url: "/projekat",
+		        data: params,
+		        dataType: 'json',
+		        processData: false,
+		        contentType: false,
+		        success: function(data) {
+		        	
+		        	 window.location = "/pretragaprojekata";
+		        }
+		    });
+		
+		}
+		
+		function deleteProjekat(projekatID) {
+		    $.ajax({
+		        type: "DELETE",
+		        url: "/projekat",
+		        data: {
+		        	projekatID: projekatID
+		        },
+		        dataType: 'json',
+		        success: function(data) {
+		            window.location = "/pretragaprojekata";
+		        }
+		    });
+		}
+   
+   </script>
 </head>
 
 <body>
@@ -104,25 +148,31 @@
 	  
 	</div>
 	<form action="" name="projekat"  method="post">
-	
+	Projekat id:
+    <input class="table-cell" type="text" name="projekatID" id="projekatID" value="{{projekat.projekatID}}">
+		
 	Tip:
-	 	 <input type="text" name="tip" id="tip" placeholder="tip" required autofocus>
+	 	 <input type="text" name="tip" id="tip" placeholder="tip" value="{{projekat.tip}}" required autofocus>
 	Naziv:
-	     <input type="text" name="naziv" id="naziv" placeholder="naziv" required>
+	     <input type="text" name="naziv" id="naziv" placeholder="naziv" value="{{projekat.naziv}}" required>
 
 	Lokacija:
-	 	 <input type="text" name="lokacija" id="lokacija" placeholder="lokacija" required autofocus>
+	 	 <input type="text" name="lokacija" id="lokacija" placeholder="lokacija" value="{{projekat.lokacija}}" required autofocus>
 	Opis:
-	     <input type="text" name="opis" id="opis" placeholder="opis" required>
+	     <input type="text" name="opis" id="opis" placeholder="opis" value="{{projekat.opis}}" required>
 	Slika:
-	 	 <input type="text" name="slika" id="slika" placeholder="slika" required autofocus>
+	 	 <input type="text" name="slika" id="slika" placeholder="slika" value="{{projekat.slika}}" required autofocus>
 
     Godina zavrsetka gradnje:
-	     <input type="text" name="godinaZavrsetka" id="godinaZavrsetka" placeholder="godinaZavrsetka" required>
+	     <input type="text" name="godinaZavrsetka" id="godinaZavrsetka" placeholder="godinaZavrsetka" value="{{projekat.godinaZavrsetka}}" required>
+    
     Sifra vlasnika:
     <input class="table-cell" type="text" name="investitorID" id="investitorID" value="{{logged.vlasnikID}}">
 		            
-	     <button class="btn btn-lg btn-primary btn-block" type="submit"> Kreiraj </button>
+    <div class="form-group form-group-lg pull-right">
+         <input type="button" value="Edit" onclick="editProjekat({{projekat.projekatID}})"/>
+         <input type="button" value="Delete" onclick="deleteProjekat({{projekat.projekatID}})"/>
+    </div>
 	Vrati se na pocetnu stranu <a href="/vlasnikForma">link</a>
     </form>
     <br>

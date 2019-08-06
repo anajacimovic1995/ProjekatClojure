@@ -145,6 +145,11 @@
                        {:vlasnik.imePrezime [like (get-text-search text)]}))
             (k/order :projekatID :ASC)))
 
+(defn update-projekat [params]
+  (k/update projekat
+            (k/set-fields params)
+            (k/where {:projekatID (:projekatID params)})))
+
 (k/defentity favorit
   (k/table :favorit))
 

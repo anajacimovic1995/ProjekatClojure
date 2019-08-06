@@ -80,8 +80,24 @@
                                         (get-projekti)
                                         (json/write-str)))))
 
+(defn get-projekat-edit-page [page params session]
+  (render-file page {:title "Projekat"
+                     :logged (:identity session)
+                     :projekat (first (db/find-projekat params))}))
+
+(defn get-projekat [{:keys [params session]}]
+    (get-projekat-edit-page "views/edit-projekat.html" params session))
+
+(defresource update-projekat [{:keys [params session]}]
+  :allowed-methods [:put]  
+  :available-media-types ["application/json"]
+  (println params)
+  (db/update-projekat params))
+
 (defroutes projekat-routes
   (GET "/projekti" request (projekti (:session request)))
   (GET "/addprojekat" request (get-add-projekat-page (:session request)))
   (POST "/addprojekat" request (add-projekat request))
-  (GET "/pretragaprojekata" request (search-projekat request)))
+  (GET "/pretragaprojekata" request (search-projekat request))
+  (GET "/projekat/:projekatID" request (get-projekat request))
+  (PUT "/projekat" request (update-projekat request)))
