@@ -94,10 +94,15 @@
   (println params)
   (db/update-projekat params))
 
+(defresource delete-projekat [{:keys [params session]}]
+  :allowed-methods [:delete]  
+  :available-media-types ["application/json"])
+
 (defroutes projekat-routes
   (GET "/projekti" request (projekti (:session request)))
   (GET "/addprojekat" request (get-add-projekat-page (:session request)))
   (POST "/addprojekat" request (add-projekat request))
   (GET "/pretragaprojekata" request (search-projekat request))
   (GET "/projekat/:projekatID" request (get-projekat request))
-  (PUT "/projekat" request (update-projekat request)))
+  (PUT "/projekat" request (update-projekat request))
+  (DELETE "/projekat" request (delete-projekat request)))

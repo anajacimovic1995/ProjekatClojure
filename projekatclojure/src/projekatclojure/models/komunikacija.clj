@@ -114,9 +114,9 @@
   (k/insert projekat
   (k/values params)))
 
-(defn delete-projekat [id]  
+(defn delete-projekat [projekatID]  
   (k/delete projekat
-  (k/where {:projekatID id})))
+  (k/where {:projekatID projekatID})))
 
 (defn delete-projekat-vlasnik [vlasnik]
   (k/delete projekat

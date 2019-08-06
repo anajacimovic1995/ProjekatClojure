@@ -83,6 +83,8 @@
 	  font-size: 30px;
 	}
 </style>
+
+   
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
@@ -95,7 +97,7 @@
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <meta charset="ISO-8859-1">
-   <title>Izmeni projekat</title>
+   
         <script>
 
      function editProjekat() {
@@ -134,7 +136,9 @@
 		        },
 		        dataType: 'json',
 		        success: function(data) {
+		        	
 		            window.location = "/pretragaprojekata";
+		            
 		        }
 		    });
 		}
@@ -173,8 +177,9 @@
          <input type="button" value="Edit" onclick="editProjekat({{projekat.projekatID}})"/>
          <input type="button" value="Delete" onclick="deleteProjekat({{projekat.projekatID}})"/>
     </div>
-	Vrati se na pocetnu stranu <a href="/vlasnikForma">link</a>
+	
     </form>
+    Vrati se na pocetnu stranu <a href="/vlasnikForma">link</a>
     <br>
 
 	
