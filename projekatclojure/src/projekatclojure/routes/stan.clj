@@ -136,7 +136,9 @@
                      :stan (first (db/find-stan params))}))
 
 (defn get-stan [{:keys [params session]}]
-    (get-stan-edit-page "views/edit-stan.html" params session))
+   (if-not (authenticated? session)
+    (redirect "/vlogin")
+    (get-stan-edit-page "views/edit-stan.html" params session)))
 
 (defresource update-stan [{:keys [params session]}]
   :allowed-methods [:put]  

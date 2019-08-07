@@ -87,7 +87,7 @@
   (let [user (get-user-by-username-from-db params)]
     (cond
       (not (register-validaton? params))
-      (get-registration-page "Please fill out all fields")
+      (get-registration-page "Potrebno je popuniti sva polja!")
 
       :else
       (assoc (redirect "/login"):session (assoc session :identity (add-user-to-db params))))))

@@ -98,7 +98,9 @@
                      :projekat (first (db/find-projekat params))}))
 
 (defn get-projekat [{:keys [params session]}]
-    (get-projekat-edit-page "views/edit-projekat.html" params session))
+   (if-not (authenticated? session)
+    (redirect "/vlogin")
+    (get-projekat-edit-page "views/edit-projekat.html" params session)))
 
 (defresource update-projekat [{:keys [params session]}]
   :allowed-methods [:put]  
