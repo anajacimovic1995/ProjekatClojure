@@ -60,10 +60,22 @@
     (db/get-stan)
     (db/search-stan text)))
 
+(defn authenticated-admin? [session]
+  (and (authenticated? session)
+       (="admin" (:rola (:identity session)))))
+
 (defn get-search-stanovi [params session]
-  (render-file "views/stan-search.html" {:title "Search stan"
-                                             :logged (:identity session)
-                                             :beers (get-stanovi nil)}))
+   (cond
+    (not (authenticated? session))
+    (redirect "/login")
+    (authenticated-admin? session)
+    (render-file "views/stan-search-admin.html" {:title "Prikaz stanova"
+                                                 :logged (:identity session)
+                                                 :stanovi (get-stanovi nil)})
+    :else
+    (render-file "views/stan-search.html" {:title "Search stan"
+                                           :logged (:identity session)
+                                           :stanovi (get-stanovi nil)})))
 
 (defn get-search-stanovi-vl [params session]
   (render-file "views/stan-search-vl.html" {:title "Search stan"

@@ -37,8 +37,20 @@
                 :logged (:identity session)
                 :projekti (db/get-projekti)}))
 
-(defn projekti [session]
-    (get-projekti-page "views/projekti.html" session))
+(defn authenticated-admin? [session]
+  (and (authenticated? session)
+       (="admin" (:rola (:identity session)))))
+
+(defn projekti [session]  
+   (cond
+    (not (authenticated? session))
+    (redirect "/login")
+    (authenticated-admin? session)
+    (render-file "views/projekat-search-admin.html" {:title "Prikaz projekata"
+                                                     :logged (:identity session)
+                                                     :projekti (db/get-projekti)})
+    :else
+    (get-projekti-page "views/projekti.html" session)))
 
 (defn get-add-projekat-page [session &[message]]
   (if-not (authenticated? session)
