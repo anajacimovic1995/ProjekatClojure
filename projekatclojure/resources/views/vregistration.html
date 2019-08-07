@@ -99,6 +99,50 @@
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <meta charset="ISO-8859-1">
 <title>Registracija vlasnika</title>
+<script>
+   var validator;
+   $(function() {
+	    validator = $("form[name='vlasnik']").validate({
+	        rules: {
+	            imePrezime: {
+	                required: true
+	            },
+	            adresa: {
+	                required: true
+	            },
+	            kontakt: {
+	                required: true
+	            },
+	            username: {
+	                required: true
+	            },
+	            password: {
+	                required: true
+	            }
+	        },
+	        messages: {
+	            imePrezime: {
+	                required: "Potrebno je da se unesu ime i prezime"
+	            },
+	            adresa: {
+	                required: "Potrebno je da se unese adresa"
+	            },
+	            kontakt: {
+	                required: "Potrebno je da se unese kontakt telefon"
+	            },
+	            username: {
+	                required: "Potrebno je da se unese username"
+	            },
+	            password: {
+	                required: "Potrebno je da se unese password"
+	            }
+	        },
+	        submitHandler: function(form) {
+	            form.submit();
+	        }
+	    });
+	});
+   </script>
 </head>
 <body>
             <form action="" name="vlasnik" method="post">

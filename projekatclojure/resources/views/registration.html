@@ -99,6 +99,44 @@
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <meta charset="ISO-8859-1">
 <title>Registracija</title>
+<script>
+   var validator;
+   $(function() {
+	    validator = $("form[name='user']").validate({
+	        rules: {
+	            imePrezime: {
+	                required: true
+	            },
+	            username: {
+	                required: true
+	            },
+	            password: {
+	                required: true
+	            },
+	            email: {
+	                required: true
+	            }
+	        },
+	        messages: {
+	            imePrezime: {
+	                required: "Potrebno je da se unesu ime i prezime"
+	            },
+	            username: {
+	                required: "Potrebno je da se unese username"
+	            },
+	            password: {
+	                required: "Potrebno je da se unese password"
+	            },
+	            email: {
+	                required: "Potrebno je da se unese email"
+	            }
+	        },
+	        submitHandler: function(form) {
+	            form.submit();
+	        }
+	    });
+	});
+   </script>
 </head>
 <body>
             <form action="" name="user" method="post">
