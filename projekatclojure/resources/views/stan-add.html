@@ -96,6 +96,89 @@
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <meta charset="ISO-8859-1">
    <title>Kreiraj oglas</title>
+      <script>
+   var validator;
+   $(function() {
+	    validator = $("form[name='stan']").validate({
+	        rules: {
+	            link: {
+	                required: true
+	            },
+	            sajt: {
+	                required: true
+	            },
+	            kvadratura: {
+	                required: true,
+	                number:true
+	            },
+	            cenaEvri: {
+	                required: true,
+	                number:true
+	            },
+	            lokacija: {
+	                required: true
+	            },
+	            slobodan: {
+	                required: true
+	            },
+	            terasa: {
+	                required: true
+	            },
+	            garazaParking: {
+	                required: true
+	            },
+	            slika: {
+	                required: true
+	            },
+	            opis: {
+	                required: true
+	            },
+	            prodavacID: {
+	                required: true
+	            }
+	            
+	        },
+	        messages: {
+	            link: {
+	                required: "Potrebno je da se unese link"
+	            },
+	            sajt: {
+	                required: "Potrebno je da se unese sajt"
+	            },
+	            kvadratura: {
+	                required: "Potrebno je da se unese kvadratura"
+	            },
+	            cenaEvri: {
+	                required: "Potrebno je da se unese cena"
+	            },
+	            lokacija: {
+	                required: "Potrebno je da se unese lokacija"
+	            },
+	            slobodan: {
+	                required: "Potrebno je da se unese da li je i dalje slobodan"
+	            },
+	            terasa: {
+	                required: "Potrebno je da se unese da li ima terasu"
+	            },
+	            garazaParking: {
+	                required: "Potrebno je da se unese da li ima garazu ili parking"
+	            },
+	            slika: {
+	                required: "Potrebno je da se unese url slike"
+	            },
+	            opis: {
+	                required: "Potrebno je da se unese opis"
+	            },
+	            prodavacID: {
+	                required: "Potrebno je da se unese id prodavca"
+	            }
+	        },
+	        submitHandler: function(form) {
+	            form.submit();
+	        }
+	    });
+	});
+   </script>
 </head>
 
 <body>
