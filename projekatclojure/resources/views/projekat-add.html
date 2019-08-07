@@ -96,6 +96,62 @@
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    <meta charset="ISO-8859-1">
    <title>Kreiraj oglas</title>
+   <script>
+   var validator;
+   $(function() {
+	    validator = $("form[name='projekat']").validate({
+	        rules: {
+	            tip: {
+	                required: true
+	            },
+	            naziv: {
+	                required: true
+	            },
+	            lokacija: {
+	                required: true
+	            },
+	            opis: {
+	                required: true
+	            },
+	            slika: {
+	                required: true
+	            },
+	            godinaZavrsetka: {
+	                required: true
+	            },
+	            investitorID: {
+	                required: true
+	            }
+	        },
+	        messages: {
+	            tip: {
+	                required: "Potrebno je da se unese tip"
+	            },
+	            naziv: {
+	                required: "Potrebno je da se unese naziv"
+	            },
+	            lokacija: {
+	                required: "Potrebno je da se unese lokacija"
+	            },
+	            opis: {
+	                required: "Potrebno je da se unese opis"
+	            },
+	            slika: {
+	                required: "Potrebno je da se unese url slike"
+	            },
+	            godinaZavrsetka: {
+	                required: "Potrebno je da se unese godina zavrsetka gradnje"
+	            },
+	            investitorID: {
+	                required: "Potrebno je da se unese id investitora"
+	            }
+	        },
+	        submitHandler: function(form) {
+	            form.submit();
+	        }
+	    });
+	});
+   </script>
 </head>
 
 <body>
