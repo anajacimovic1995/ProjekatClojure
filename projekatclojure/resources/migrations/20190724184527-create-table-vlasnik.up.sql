@@ -7,3 +7,8 @@ CREATE TABLE IF NOT EXISTS vlasnik (
    password VARCHAR(255) NOT NULL,
    PRIMARY KEY (vlasnikID)
 );
+
+INSERT INTO `vlasnik`
+(imePrezime, adresa, kontakt, username, password) VALUES 
+('Neko', 'negde', '09876', 'neko', '1234'),
+('mm', 'mm', '123', 'mm', 'mm');

@@ -17,4 +17,4 @@ CREATE TABLE IF NOT EXISTS stan (
 
 --;;
 INSERT INTO `stan` (link, sajt, kvadratura, cenaEvri, lokacija, slobodan, terasa, garazaParking, slika, opis, prodavacID) VALUES
-('url','nekretnie.rs','25','50000','Djeram','0','0','garaza','url','super stan','1');
+('url','nekretnie.rs','25','50000','Djeram','0','0','garaza','https://www.nekretnine24.rs/slike/683/1-11.JPG','super stan','1');

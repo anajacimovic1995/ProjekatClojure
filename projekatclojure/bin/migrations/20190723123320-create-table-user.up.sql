@@ -14,4 +14,5 @@ INSERT INTO `user`
 ('Ana Jacimovic', 'ana', '12345', 'ana@gmail.com', '`kupac`'),
 ('Ana Jacimovic', 'ana1', '12345', 'ana@gmail.com', '`kupac`'),
 ('bogdan nisic', 'boba', '123', 'boba@gmail.com', '`kupac`'),
-('olivera kordic', 'olja', '123', 'olja@gmail.com', '`kupac`');
+('olivera kordic', 'olja', '123', 'olja@gmail.com', '`kupac`'),
+('ana', 'admin', 'admin', 'admin@gmail.com', '`admin`');
