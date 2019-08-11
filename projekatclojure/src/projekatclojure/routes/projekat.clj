@@ -13,6 +13,17 @@
             [clojure.string :as str]
             [ring.util.response :refer [redirect]]))
 
+(def file-config (clojure.edn/read-string (slurp "file-config.edn")))
+
+(defn create-file-name [{:keys [fname content-type]}]
+  (str (:short-img-location file-config) fname "." (last (str/split content-type #"/"))))
+
+(defn get-picture-url [params]
+  (if (contains? params :url)
+    (:url params)
+    (->(assoc (:file params) :fname (:name params))
+       (create-file-name))))
+
 (def projekat-schema
   {:tip [st/required st/string]
    :naziv [st/required st/string]
@@ -41,6 +52,9 @@
   (and (authenticated? session)
        (="admin" (:rola (:identity session)))))
 
+(defn upload-picture [{:keys [fname tempfile]}]
+  (io/copy tempfile (io/file (:resources-folder file-config) fname)))
+
 (defn projekti [session]  
    (cond
     (not (authenticated? session))
@@ -61,9 +75,20 @@
 (defn add-projekat [{:keys [params session]}]
     (println params)
     (projekat-validation? params)
-
-    (db/add-projekat params)
+    (let [file (get-picture-url params)]
+    (if-not (contains? params :url)
+      (->(assoc (:file params) :fname file))
+      (upload-picture))
+    (-> (dissoc (assoc params :slika file) :file :url)
+        (db/add-projekat params)
+        (:generated_key)))    
     (redirect "/vlasnikForma"))
+
+(defn get-projekat-slika-from-db [params]
+  (:slika (first (db/find-projekat (select-keys params [:projekatID])))))
+
+(defn file-exists? [params]
+  (.exists (clojure.java.io/as-file (str (:resources-folder file-config) (get-projekat-slika-from-db params)))))
 
 (defn get-projekti [text]
   (if (or (nil? text)

@@ -45,6 +45,17 @@
 		    font-size: 16px;
 		    color: white;
 		}
+	    .content-pic {
+		    height:90%; /* = 100% - 2*5% padding */
+		    width:90%; /* = 100% - 2*5% padding */
+		
+		}
+	    .content-pic .rs{    
+		    width:auto;
+		    height:auto;
+		    max-height:90%;
+		    max-width:100%;
+		}
    </style>
 	
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -86,10 +97,13 @@
 		   <div class="content-pic">		   	        		           
 		      <form action="" name="favorit"  method="post">
 		        <div class="table">	
-		        	<div class="table-cell">
+		        	<div class="table-cell"> 
+		        		<img class="rs" src="{{s.slika}}"/>       	
+		        	<div class="table-cell"> 
 		            <input class="table-cell" type="text" name="stanID" id="stanID" value="{{s.stanID}}" readonly>    
 		            </div>
 		            <div class="table-cell">
+		            
 		            {{s.sajt}}	             
 		            </div>
 		            <div class="table-cell">

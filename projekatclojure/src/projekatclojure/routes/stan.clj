@@ -13,6 +13,17 @@
             [clojure.string :as str]
             [ring.util.response :refer [redirect]]))
 
+(def file-config (clojure.edn/read-string (slurp "file-config.edn")))
+
+(defn create-file-name [{:keys [fname content-type]}]
+  (str (:short-img-location file-config) fname "." (last (str/split content-type #"/"))))
+
+(defn get-picture-url [params]
+  (if (contains? params :url)
+    (:url params)
+    (->(assoc (:file params) :fname (:name params))
+       (create-file-name))))
+
 (def stan-schema
   {:link [st/required st/string]
    :sajt [st/required st/string]
@@ -44,6 +55,13 @@
                {:title "Stanovi"
                 :logged (:identity session)
                 :stanovi (db/get-stan)}))
+
+(defn get-stan-slika-from-db [params]
+  (:slika (first (db/find-stan (select-keys params [:stanID])))))
+
+(defn file-exists? [params]
+  (.exists (clojure.java.io/as-file (str (:resources-folder file-config) (get-stan-slika-from-db params)))))
+
 
 (defn stanovi [session]
     (get-stanovi-page "views/stanovi.html" session))

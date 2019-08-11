@@ -31,6 +31,19 @@
 		  background-color: #555;
 		  color: white;
 		}
+		tr:hover { 
+		   background: white; 
+		}
+		td a { 
+		   display: block; 
+		   border: 1px solid black;
+		   padding: 16px; 
+		}
+		.navigation {		   
+		    top: 0;
+		    width: 100%;
+		}
+		
 		.table{
 		    display:table;
 		    width:100%;
@@ -44,6 +57,17 @@
 		    margin: 0 0 0px 0;
 		    font-size: 16px;
 		    color: white;
+		}
+		.content-pic {
+		    height:90%; /* = 100% - 2*5% padding */
+		    width:90%; /* = 100% - 2*5% padding */
+		
+		}
+	    .content-pic .rs{    
+		    width:auto;
+		    height:auto;
+		    max-height:90%;
+		    max-width:100%;
 		}
    </style>
 	
@@ -85,8 +109,11 @@
 		<div class="square">
 		   <div class="content-pic">
 		        <div class="table">
+		            <div class="table-cell"> 
+		        		<img class="rs" src="{{p.slika}}"/>       	
+		        	<div class="table-cell"> 
 		        	<div class="table-cell">
-		                {{p.projekatID}}
+		        		{{p.projekatID}}
 		            </div>
 		            <div class="table-cell">
 		                {{p.naziv}}
