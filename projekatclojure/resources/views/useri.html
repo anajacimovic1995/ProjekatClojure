@@ -184,9 +184,10 @@
 		 <a href="/projekti">Prikaz projekata</a>
          <a href="/useri">Prikaz kupaca</a>
          <a href="/vlasnici">Prikaz prodavaca</a>                        
-         <a href="/logout">Izloguj se sa naloga</a>
+         <a href="/logout" class="right">Izloguj se sa naloga</a>
 		</div>
-      <div class="row">
+		<div> <p>U narednoj tabeli se nalazi lista kupaca koji imaju nalog. Klikom na red u kome se nalazi odredjen kupac, izabrani kupac ce biti obrisan.</p></div>
+		<div class="row">
            <input type="text" name="search" placeholder="Pretraga ..." onkeyup="searchUser(this.value);" autofocus/>
            <table id="table-useri" class="table">
             <thead>
