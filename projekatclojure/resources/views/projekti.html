@@ -31,34 +31,49 @@
 		  background-color: #555;
 		  color: white;
 		}
-		tr:hover { 
-		   background: white; 
-		}
-		td a { 
-		   display: block; 
-		   border: 1px solid black;
-		   padding: 16px; 
-		}
-		.navigation {		   
-		    top: 0;
-		    width: 100%;
-		}
-		
 		.table{
 		    display:table;
-		    width:100%;
-		    height:100%;
+		    height:50px;
+		    margin: 25px 70px;
+		    table-layout: fixed;
+ 				  position: relative;
+	  width: 100%;
+	  margin: 2 auto;
+	  background: rgba(130,130,130,.3);
+	  padding: 40px 40px;
 		}
 		.table-cell{
-		    vertical-align:middle;
+		    vertical-align:sub;
 		/*     padding: 5px 0; */
-		    background: #2f6818;
+		    background: #F5F5DC;
 		    text-align: center;
 		    margin: 0 0 0px 0;
-		    font-size: 16px;
-		    color: white;
+		    font-size: 18px;
+		    color: black;
 		}
-		.content-pic {
+		.table-cell-1{
+		    vertical-align:middle;
+		/*     padding: 5px 0; */
+		    background: #F5F5DC;
+		    text-align: center;
+		    margin: 0 0 0px 0;
+		    font-size: 18px;
+		    color: black;
+		    border-style: hidden;
+		    visibility: hidden;
+		}
+				.table-cell-2{
+		    vertical-align:middle;
+		/*     padding: 5px 0; */
+		    background: #F5F5DC;
+		    text-align: center;
+		    margin: 0 0 0px 0;
+		    font-size: 18px;
+		    color: black;
+		    
+    		background-color:#5F9EA0
+		}
+	    .content-pic {
 		    height:90%; /* = 100% - 2*5% padding */
 		    width:90%; /* = 100% - 2*5% padding */
 		
@@ -66,8 +81,8 @@
 	    .content-pic .rs{    
 		    width:auto;
 		    height:auto;
-		    max-height:90%;
-		    max-width:100%;
+		    max-height:60%;
+		    max-width:70%;
 		}
 				
 		body {
@@ -95,7 +110,7 @@
 		  position: -webkit-sticky;
 		  top: 0;
 		}
-		
+				
 		.navbar a {
 		  float: left;
 		  display: block;
@@ -104,7 +119,7 @@
 		  padding: 14px 20px;
 		  text-decoration: none;
 		}
-				
+		
 		.navbar a.right {
 		  float: right;
 		}
@@ -118,6 +133,24 @@
 		  background-color: #666;
 		  color: white;
 		}
+		label.btn {
+    padding: 10 0;
+    white-space: normal;
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -webkit-transition-duration: .3s;
+    -moz-transition-duration: .3s;
+    -o-transition-duration: .3s;
+}
+
+btn.btn:hover {
+/*     text-shadow: 0 3px 2px rgba(0,0,0,0.4); */
+    color:black;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1)
+}
    </style>
 	
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -154,19 +187,19 @@
 		        		<img class="rs" src="{{p.slika}}"/>       	
 		        	</div> 
 		        	<div class="table-cell">
-		        		{{p.projekatID}}
+		        		ID projekta: {{p.projekatID}}
 		            </div>
 		            <div class="table-cell">
-		                {{p.naziv}}
+		                Naziv projekta: {{p.naziv}}
 		            </div>
 		            <div class="table-cell">
-		                {{p.lokacija}}
+		                Lokacija: {{p.lokacija}}
 		            </div>
 		            <div class="table-cell">
-		                {{p.vime}}
+		                Ime investitora: {{p.vime}}
 		            </div>
 		            <div class="table-cell">
-		                {{p.godinaZavrsetka}}
+		                Godina zavrsetka gradnje: {{p.godinaZavrsetka}}
 		            </div>
 		        </div>
 		    </div>

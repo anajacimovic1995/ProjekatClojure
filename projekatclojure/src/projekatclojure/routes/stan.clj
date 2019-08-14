@@ -54,7 +54,8 @@
   (render-file page
                {:title "Stanovi"
                 :logged (:identity session)
-                :stanovi (db/get-stan)}))
+                :stanovi (db/get-stan)
+                :favoriti (db/get-favorit)}))
 
 (defn get-stan-slika-from-db [params]
   (:slika (first (db/find-stan (select-keys params [:stanID])))))

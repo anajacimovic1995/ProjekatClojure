@@ -33,17 +33,56 @@
 		}
 		.table{
 		    display:table;
-		    width:100%;
-		    height:100%;
+		    height:50px;
+		    margin: 25px 70px;
+		    table-layout: fixed;
+ 				  position: relative;
+	  width: 100%;
+	  margin: 2 auto;
+	  background: rgba(130,130,130,.3);
+	  padding: 40px 40px;
 		}
 		.table-cell{
-		    vertical-align:middle;
+		    vertical-align:sub;
 		/*     padding: 5px 0; */
-		    background: #2f6818;
+		    background: #F5F5DC;
 		    text-align: center;
 		    margin: 0 0 0px 0;
-		    font-size: 16px;
-		    color: white;
+		    font-size: 18px;
+		    color: black;
+		}
+		.table-cell-1{
+		    vertical-align:middle;
+		/*     padding: 5px 0; */
+		    background: #F5F5DC;
+		    text-align: center;
+		    margin: 0 0 0px 0;
+		    font-size: 18px;
+		    color: black;
+		    border-style: hidden;
+		    visibility: hidden;
+		}
+				.table-cell-2{
+		    vertical-align:middle;
+		/*     padding: 5px 0; */
+		    background: #F5F5DC;
+		    text-align: center;
+		    margin: 0 0 0px 0;
+		    font-size: 18px;
+		    color: black;
+		    
+    		background-color:#5F9EA0
+		}
+	    .content-pic {
+		    height:90%; /* = 100% - 2*5% padding */
+		    width:90%; /* = 100% - 2*5% padding */
+		
+		}
+	    .content-pic .rs{    
+		    width:auto;
+		    height:auto;
+		    max-height:60%;
+		    max-width:70%;
 		}
 				
 		body {
@@ -94,6 +133,24 @@
 		  background-color: #666;
 		  color: white;
 		}
+		label.btn {
+    padding: 10 0;
+    white-space: normal;
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -webkit-transition-duration: .3s;
+    -moz-transition-duration: .3s;
+    -o-transition-duration: .3s;
+}
+
+btn.btn:hover {
+/*     text-shadow: 0 3px 2px rgba(0,0,0,0.4); */
+    color:black;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1)
+}
    </style>
 	
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -120,17 +177,20 @@
           <a href="/pretraga">Pretraga stanova</a>
           <a href="/projekti">Projekti</a>
           <a href="/favoriti">Izdvojeni stanovi</a>                       
-          <a href="/logout">Izloguj se sa naloga</a>
+          <a href="/logout" class="right">Izloguj se sa naloga</a>
 		</div>
 		{% for f in favoriti %}
 		<div class="square">
 		   <div class="content-pic">		   
 		   {% if f.userID = logged.userID %}
 		        <div class="table">
-		        	<div class="table-cell">
-		        	
-		                {{f.slokacija}}
+		            <div class="table-cell">		        	
+		                ID stana: {{f.stanID}}
 		            </div>
+		        	<div class="table-cell">		        	
+		                Lokacija stana: {{f.slokacija}}
+		            </div>
+
 		        </div>
 		    {% endif %}
 		    </div>
