@@ -3,12 +3,9 @@
 <head>
  
 <style>
-	body {
-	  background: #999;
-	  padding: 40px;
-	}
 	html,body{
-	background-color:#33383E;
+	 background: white;
+	 padding: 40px;
 	 justify-content: center;
 	 align-items: center;
 	 height: 100%;
@@ -17,7 +14,12 @@
 	.login {
 	  display: inline-block;
 	}
-	
+	/* Footer */
+	.footer {
+	  padding: 20px;
+	  text-align: center;
+	  background: #ddd;
+	}
 	#bg {
 	  position: fixed;
 	  left: 0;
@@ -57,7 +59,17 @@
 	  text-shadow: 0 1px 0 rgba(0,0,0,.1);
 	  margin-bottom: 10px;
 	}
-	
+	.table-cell-1{
+		    vertical-align:middle;
+		/*     padding: 5px 0; */
+		    background: #F5F5DC;
+		    text-align: center;
+		    margin: 0 0 0px 0;
+		    font-size: 18px;
+		    color: black;
+		    border-style: hidden;
+		    visibility: hidden;
+		}
 	form input:focus { background-color: rgba(0,0,0,.4); }
 
 	
@@ -193,8 +205,8 @@
          <a href="/vlogout" class="right">Izloguj se sa naloga</a>
 		</div>
 	<form action="" name="stan"  method="post">
-	Stan id:
-    <input class="table-cell" type="text" name="stanID" id="stanID" value="{{stan.stanID}}">
+	ID stana:
+    <input class="table-cell" type="text" name="stanID" id="stanID" value="{{stan.stanID}}" readonly>
 	
 	Link:
 	 	 <input type="text" name="link" id="link" placeholder="link" value = "{{stan.link}}" required autofocus>
@@ -216,19 +228,21 @@
 	 	 <input type="text" name="slika" id="slika" placeholder="slika"  value = "{{stan.slika}}" required autofocus>
 	Opis:
 	     <input type="text" name="opis" id="opis" placeholder="opis"  value = "{{stan.opis}}" required>
-    Sifra vlasnika:
-    <input class="table-cell" type="text" name="prodavacID" id="prodavacID" value="{{logged.vlasnikID}}">
+    
+    <input class="table-cell-1" type="text" name="prodavacID" id="prodavacID" value="{{logged.vlasnikID}}">
 		            
 	
-	
+	<a href="/vlasnikForma"> Povratak na glavnu formu. </a>	 
 	<div class="form-group form-group-lg pull-right">
          <input type="button" value="Edit" onclick="editStan({{stan.stanID}})"/>
          <input type="button" value="Delete" onclick="deleteStan({{stan.stanID}})"/>
     </div>
     </form>
-    Vrati se na pocetnu stranu <a href="/vlasnikForma">link</a>
+    
     <br>
-
+    <div class="footer">
+	  <h2>Footer</h2>
+	</div>
 	
 
 </body>

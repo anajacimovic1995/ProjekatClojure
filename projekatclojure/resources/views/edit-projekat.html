@@ -2,12 +2,10 @@
 <html>
 <head>
 <style>
-	body {
-	  background: #999;
-	  padding: 40px;
-	}
+
 	html,body{
-	background-color:#33383E;
+	 background: white;
+	 padding: 40px;
 	 justify-content: center;
 	 align-items: center;
 	 height: 100%;
@@ -16,16 +14,11 @@
 	.login {
 	  display: inline-block;
 	}
-	
-	#bg {
-	  position: fixed;
-	  left: 0;
-	  top: 0;
-	  width: 100%;
-	  height: 100%;
-	  background: url("../images/ban1.jpg") no-repeat center center fixed;
-	  background-size: cover;
-	  -webkit-filter: blur(5px);
+	/* Footer */
+	.footer {
+	  padding: 20px;
+	  text-align: center;
+	  background: #ddd;
 	}
 	
 	form {
@@ -57,18 +50,13 @@
 	  margin-bottom: 10px;
 	}
 	
-	form input:focus { background-color: rgba(0,0,0,.4); }
 
-	
-	::-webkit-input-placeholder { color: #ccc;  }
-	::-moz-placeholder { color: #ccc;  }
-	:-ms-input-placeholder { color: #ccc;  }
 	
 	form button[type=submit] {
 	  color: #3f898a;
 	  text-shadow: 0 1px 0 #133d3e;
 	  text-transform: uppercase;
-	  background: #ffdf80;
+
 	  border-top-color: #9fb5b5;
 	  border-left-color: #608586;
 	  border-bottom-color: #1b4849;
@@ -82,12 +70,18 @@
 	  color: white;
 	  font-size: 30px;
 	}
-			.header {
-		  padding: 80px;
-		  text-align: center;
-		  background: #1abc9c;
-		  color: white;
-		}		
+			.table-cell-1{
+		    vertical-align:middle;
+		/*     padding: 5px 0; */
+		    background: #F5F5DC;
+		    text-align: center;
+		    margin: 0 0 0px 0;
+		    font-size: 18px;
+		    color: black;
+		    border-style: hidden;
+		    visibility: hidden;
+		}
+	
 		
 		.header h1 {
 		  font-size: 40px;
@@ -200,10 +194,10 @@
          <a href="/vlogout" class="right">Izloguj se sa naloga</a>
 		</div>
 	<form action="" name="projekat"  method="post">
-	Projekat id:
-    <input class="table-cell" type="text" name="projekatID" id="projekatID" value="{{projekat.projekatID}}">
+	ID projekta:
+    <input class="table-cell" type="text" name="projekatID" id="projekatID" value="{{projekat.projekatID}}" readonly>
 		
-	Tip:
+	Tip (novogradnja/starogradnja):
 	 	 <input type="text" name="tip" id="tip" placeholder="tip" value="{{projekat.tip}}" required autofocus>
 	Naziv:
 	     <input type="text" name="naziv" id="naziv" placeholder="naziv" value="{{projekat.naziv}}" required>
@@ -218,18 +212,21 @@
     Godina zavrsetka gradnje:
 	     <input type="text" name="godinaZavrsetka" id="godinaZavrsetka" placeholder="godinaZavrsetka" value="{{projekat.godinaZavrsetka}}" required>
     
-    Sifra vlasnika:
-    <input class="table-cell" type="text" name="investitorID" id="investitorID" value="{{logged.vlasnikID}}">
-		            
+    
+    <input class="table-cell-1" type="text" name="investitorID" id="investitorID" value="{{logged.vlasnikID}}">
+		
+	<a href="/vlasnikForma"> Povratak na glavnu formu. </a>	            
     <div class="form-group form-group-lg pull-right">
          <input type="button" value="Edit" onclick="editProjekat({{projekat.projekatID}})"/>
     </div>
 	
     </form>
-    Vrati se na pocetnu stranu <a href="/vlasnikForma">link</a>
+    
     <br>
 
-	
+    <div class="footer">
+	  <h2>Footer</h2>
+	</div>
 
 </body>
 </html>

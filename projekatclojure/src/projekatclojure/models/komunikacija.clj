@@ -158,6 +158,24 @@
           (k/fields :* [:stan.lokacija :slokacija])
           (k/join stan (= :favorit.stanID :stan.stanID))))
 
+(defn find-favorit-by-user [id]
+  (k/select favorit
+          (k/fields :* [:stan.lokacija :slokacija])
+          (k/join stan (= :favorit.stanID :stan.stanID))
+          (k/where {:userID id})))
+
+(defn find-favorit-by-stan [id]
+  (k/select favorit
+          (k/fields :* [:stan.lokacija :slokacija])
+          (k/join stan (= :favorit.stanID :stan.stanID))
+          (k/where {:stanID id})))
+
+(defn find-favorit [params]
+  (k/select favorit
+          (k/fields :* [:stan.lokacija :slokacija])
+          (k/join stan (= :favorit.stanID :stan.stanID))
+          (k/where params)))
+
 (defn add-favorit [params]
   (k/insert favorit
   (k/values params)))

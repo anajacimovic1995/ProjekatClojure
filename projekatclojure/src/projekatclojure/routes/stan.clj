@@ -49,13 +49,14 @@
               :slika (:slika params)
               :opis (:opis params)
               :prodavacID (read-string (:prodavacID params))} stan-schema))
-
+(defn get-favoriti [user]
+  (db/find-favorit-by-user (:userID user)))
 (defn get-stanovi-page [page session]
   (render-file page
                {:title "Stanovi"
                 :logged (:identity session)
                 :stanovi (db/get-stan)
-                :favoriti (db/get-favorit)}))
+                :favoriti (get-favoriti (:identity session))}))
 
 (defn get-stan-slika-from-db [params]
   (:slika (first (db/find-stan (select-keys params [:stanID])))))

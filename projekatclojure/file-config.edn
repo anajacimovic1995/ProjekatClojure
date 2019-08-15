@@ -1,1 +1,1 @@
-{:resources-folder "resources" :short-img-location "/images/slike/" :full-img-location "resources/public/images/slike/"}
+{:resources-folder "resources" :short-img-location "/images/" :full-img-location "resources/images/"}

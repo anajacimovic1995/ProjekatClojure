@@ -15,7 +15,12 @@
 		  position: fixed;
 		  height: 100%;
 		}
-		
+		/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
 		li a {
 		  display: block;
 		  color: #000;
@@ -230,23 +235,16 @@ btn.btn:hover {
 		            <div class="table-cell">
 		            <input class="table-cell-1" type="text" name="userID" id="userID" value="{{logged.userID}}" readonly>
 		            </div>
-		            {% for f in favoriti %}
-		            {% if logged.userID = f.userID %}
-		            {% if s.stanID = f.stanID %}
-		            <div class="table-cell-2">
-	 	 				<button class="btn btn-block" type="submit" disabled> Favorit </button>				
-		            </div>	
-					{% else %}	
 		            <div class="table-cell-2">
 	 	 				<button class="btn btn-block" type="submit"> Favorit </button>				
-		            </div>
-		            {% endif %}
-		            {% endif %}
-		            {% endfor %}				
+		            			
 		        </div>
 		       </form> 
 		    </div>		    	
 		</div>
 		{% endfor %}
+    <div class="footer">
+	  <h2>Footer</h2>
+	</div>
 </body>
 </html>

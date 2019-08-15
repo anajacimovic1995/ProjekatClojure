@@ -2,12 +2,9 @@
 <html>
 <head>
 <style>
-	body {
-	  background: #999;
-	  padding: 40px;
-	}
 	html,body{
-	background-color:#33383E;
+	 background: white;
+	 padding: 40px;
 	 justify-content: center;
 	 align-items: center;
 	 height: 100%;
@@ -16,7 +13,12 @@
 	.login {
 	  display: inline-block;
 	}
-	
+	/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
 	#bg {
 	  position: fixed;
 	  left: 0;
@@ -255,13 +257,15 @@
 	Opis:
 	     <input type="text" name="opis" id="opis" placeholder="opis" required>
     Sifra vlasnika:
-    <input class="table-cell" type="text" name="prodavacID" id="prodavacID" value="{{logged.vlasnikID}}">
+    <input class="table-cell" type="text" name="prodavacID" id="prodavacID" value="{{logged.vlasnikID}}" readonly>
 		            
 	     <button class="btn btn-lg btn-primary btn-block" type="submit"> Kreiraj </button>
 	Vrati se na pocetnu stranu <a href="/vlasnikForma">link</a>
     </form>
     <br>
-
+    <div class="footer">
+	  <h2>Footer</h2>
+	</div>
 	
 
 </body>
