@@ -169,9 +169,13 @@
 	            garazaParking: {
 	                required: true
 	            },
-	            slika: {
+	            file: {
 	                required: true
 	            },
+	            url: {
+	                required: true,
+	                url2: true
+	            }
 	            opis: {
 	                required: true
 	            },
@@ -205,9 +209,12 @@
 	            garazaParking: {
 	                required: "Potrebno je da se unese da li ima garazu ili parking"
 	            },
-	            slika: {
+	            file: {
 	                required: "Potrebno je da se unese url slike"
 	            },
+	            url: {
+	                required: "Potrebno je da se unese url"
+	            }
 	            opis: {
 	                required: "Potrebno je da se unese opis"
 	            },
@@ -216,10 +223,34 @@
 	            }
 	        },
 	        submitHandler: function(form) {
+
+	            $('[name="optradio"]').prop("disabled", true);
 	            form.submit();
 	        }
 	    });
 	});
+   
+   $(document).ready(function() {
+	    test();
+	    $("input[name='optradio']").change(function() {
+	        test();
+	    });
+	});
+
+	function test() {
+	    var option = $('input[name=optradio]:checked').val();
+	    var img = $("#img").attr('src');
+	    if (option == "upload") {
+	        $("#input-picture").html('<input type="file" id="pic-upload" name="file" accept="image/*" />');
+	    } else if (img != undefined) {
+	        if (img.indexOf("http") < 0) {
+	            img = location.protocol + '//' + location.host + img;
+	        }
+	        $("#input-picture").html('<input type="text" id="pic-url" name="url" placeholder="Image url" value="' + img + '"/>');
+	    } else {
+	        $("#input-picture").html('<input type="text" id="pic-url" name="url" placeholder="Image url"/>');
+	    }
+	}
    </script>
 </head>
 
@@ -246,14 +277,20 @@
 	     <input type="text" name="cenaEvri" id="cenaEvri" placeholder="cenaEvri" required>
 	Lokacija:
 	 	 <input type="text" name="lokacija" id="lokacija" placeholder="lokacija" required autofocus>
-	Stan je slobodan.
+	Stan je slobodan ako je upisana 0, ukoliko je 1, zauzet je.
          <input class="table-cell" type="text" name="slobodan" id="slobodan" value="0">
 	Terasa (0 ako ima, 1 ako nema):
 	     <input type="text" name="terasa" id="terasa" placeholder="terasa" required>
 	Garaza/parking:
 	     <input type="text" name="garazaParking" id="garazaParking" placeholder="garazaParking" required>
 	Slika:
-	 	 <input type="text" name="slika" id="slika" placeholder="slika" required autofocus>
+		<div class="form-group form-group-lg">
+           <label class="radio-inline"><input type="radio" name="optradio" checked value="url">Image url</label>
+           <label class="radio-inline"><input type="radio" name="optradio" value="upload">Upload image</label>
+         </div>
+         <div class="form-group form-group-lg" id="input-picture">
+           <input type="text" id="pic-url" name="url" placeholder="Image url" value="{{stan.slika}}"/>
+        </div>
 	Opis:
 	     <input type="text" name="opis" id="opis" placeholder="opis" required>
     Sifra vlasnika:

@@ -46,7 +46,7 @@
               :slobodan (read-string (:slobodan params))
               :terasa (read-string (:terasa params))
               :garazaParking (:garazaParking params)
-              :slika (:slika params)
+              :slika (get-picture-url params)
               :opis (:opis params)
               :prodavacID (read-string (:prodavacID params))} stan-schema))
 (defn get-favoriti [user]

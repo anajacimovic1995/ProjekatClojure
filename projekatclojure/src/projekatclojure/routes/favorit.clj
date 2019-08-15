@@ -35,7 +35,7 @@
 
 
 (defn favorit-page-submit [{:keys [params session]}]
-        (add-favorit-to-db params)
+    (add-favorit-to-db params)
         (redirect "/stanovi"))
 
 
