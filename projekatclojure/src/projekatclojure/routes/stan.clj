@@ -46,7 +46,7 @@
               :slobodan (read-string (:slobodan params))
               :terasa (read-string (:terasa params))
               :garazaParking (:garazaParking params)
-              :slika (get-picture-url params)
+              :slika (:slika params)
               :opis (:opis params)
               :prodavacID (read-string (:prodavacID params))} stan-schema))
 (defn get-favoriti [user]
@@ -57,6 +57,9 @@
                 :logged (:identity session)
                 :stanovi (db/get-stan)
                 :favoriti (get-favoriti (:identity session))}))
+
+(defn upload-picture [{:keys [fname tempfile]}]
+  (io/copy tempfile (io/file (:resources-folder file-config) fname)))
 
 (defn get-stan-slika-from-db [params]
   (:slika (first (db/find-stan (select-keys params [:stanID])))))

@@ -14,7 +14,6 @@
 	  margin: 0;
 	}
 	
-	
 	.header {
 	  padding: 80px;
 	  text-align: center;
@@ -369,7 +368,15 @@
 		<link rel="stylesheet" href="css/footer-distributed-with-contact-form.css">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 		<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
-	
+		   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+   <link href='http://fonts.googleapis.com/css?family=Stint+Ultra+Condensed' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Bevan' rel='stylesheet' type='text/css'>
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+ 
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script>
 function searchStan(text) {
     $.ajax({
@@ -390,6 +397,9 @@ function searchStan(text) {
                     tableData += "<td>" + data[i].kvadratura + "</td>";
                     tableData += "<td>" + data[i].cenaEvri + "</td>";
                     tableData += "<td>" + data[i].vime + "</td>";
+                    tableData += "<td>" + data[i].slobodan + "</td>";
+                    tableData += "<td>" + data[i].terasa + "</td>";
+                    tableData += "<td>" + data[i].garazaParking + "</td>";
                     tableData += "<tr>";
                 }
             }
@@ -442,18 +452,16 @@ function searchStan(text) {
                <td>{{s.cenaEvri}}</td>
                <td>{{s.vime}}</td>    
                {% if s.slobodan = 0 %}
-		            <td>Slobodan je!</td>
+		       <td>Slobodan je!</td>
 		       {% else %}
-		            <td>Stan vise nije slobodan!</td>
+		       <td>Stan vise nije slobodan!</td>
 		       {% endif %}   
 		       {% if s.terasa = 0 %}
-		            <td>Ima</td>
+		       <td>Ima</td>
 		       {% else %}
-		            <td>Nema</td>
+		       <td>Nema</td>
 		       {% endif %}   
 		       <td>{{s.garazaParking}}</td>              
-               </tr>
-               {% endfor %}              
                </tr>
                {% endfor %}
              </tbody>

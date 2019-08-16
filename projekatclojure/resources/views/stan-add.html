@@ -475,7 +475,7 @@
          <a href="/pretragaprojekata">Pregled projekata</a>                
          <a href="/vlogout" class="right">Izloguj se sa naloga</a>
 		</div>
-	<form action="" name="stan"  method="post">
+	<form action="" name="stan"  method="post" enctype="multipart/form-data">
 	
 	Link:
 	 	 <input type="text" name="link" id="link" placeholder="link" required autofocus>
@@ -494,14 +494,8 @@
 	Garaza/parking:
 	     <input type="text" name="garazaParking" id="garazaParking" placeholder="garazaParking" required>
 	Slika:
-		<div class="form-group form-group-lg">
-           <label class="radio-inline"><input type="radio" name="optradio" checked value="url">Image url</label>
-           <label class="radio-inline"><input type="radio" name="optradio" value="upload">Upload image</label>
-         </div>
-         <div class="form-group form-group-lg" id="input-picture">
-           <input type="text" id="pic-url" name="url" placeholder="Image url" value="{{stan.slika}}"/>
-        </div>
-	Opis:
+           <input type="text" id="slika" name="slika" placeholder="slika" value="{{stan.slika}}"/>
+    Opis:
 	     <input type="text" name="opis" id="opis" placeholder="opis" required>
     Sifra vlasnika:
     <input class="table-cell" type="text" name="prodavacID" id="prodavacID" value="{{logged.vlasnikID}}" readonly>
