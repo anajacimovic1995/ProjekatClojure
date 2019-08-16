@@ -31,7 +31,7 @@
                  [yogthos/config "1.1.1"]
                  [clj-http "3.9.1"]
                  [cheshire "5.8.1"]
-                 [http-kit "2.2.0"]]  
+                 [http-kit "2.2.0"]] 
   :require [config.core :refer [env]]  
   :jvm-opts ["-Dconf=dev-config.edn"]  
   :plugins [[lein-ring "0.8.12"]
