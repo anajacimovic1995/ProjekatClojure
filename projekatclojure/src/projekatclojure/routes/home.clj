@@ -15,8 +15,12 @@
   [session]
   (get-home-page "views/home.html" session))
 
+(defn send-submit [{:keys [params session]}]
+  (get-home-page "views/home.html" session))
+
 (defroutes home-routes
-           (GET "/" request (home-page (:session request))))
+           (GET "/" request (home-page (:session request)))
+           (POST "/" request (send-submit request)))
 
 
 
