@@ -405,6 +405,7 @@
  			  
              <tbody>
               {% for p in projekti %}
+              {% if logged.vlasnikID = p.investitorID %}
                <tr id="{{p.projekatID}}" onclick="getProjekat(this.id)" class="clickable-row">
                <td>{{p.projekatID}}</td>
                <td>{{p.tip}}</td>
@@ -415,6 +416,7 @@
                <td>{{p.vime}}</td> 
                <td>{{p.godinaZavrsetka}}</td>                            
                </tr>
+               {% endif %}
                {% endfor %}
               
              </tbody>

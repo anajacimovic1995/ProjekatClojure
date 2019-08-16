@@ -370,6 +370,9 @@ function searchStan(text) {
               <th>Kvadratura</th>
               <th>Cena</th>
               <th>Vlasnik</th>
+              <th>Slobodan</th>
+              <th>Terasa</th>
+              <th>Garaza ili parking</th>
              </thead>
              <tbody>
                {% for s in stanovi %}
@@ -378,7 +381,20 @@ function searchStan(text) {
                <td>{{s.lokacija}}</td>
                <td>{{s.kvadratura}}</td>
                <td>{{s.cenaEvri}}</td>
-               <td>{{s.vime}}</td>                  
+               <td>{{s.vime}}</td>    
+               {% if s.slobodan = 0 %}
+		            <td>Slobodan je!</td>
+		       {% else %}
+		            <td>Stan vise nije slobodan!</td>
+		       {% endif %}   
+		       {% if s.terasa = 0 %}
+		            <td>Ima</td>
+		       {% else %}
+		            <td>Nema</td>
+		       {% endif %}   
+		       <td>{{s.garazaParking}}</td>              
+               </tr>
+               {% endfor %}              
                </tr>
                {% endfor %}
              </tbody>

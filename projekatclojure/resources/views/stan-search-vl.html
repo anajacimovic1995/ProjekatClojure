@@ -400,7 +400,10 @@
               <th>Lokacija</th>
               <th>Kvadratura</th>
               <th>Cena</th>
-              <th>Vlasnik</th>              
+              <th>Vlasnik</th>
+              <th>Slobodan</th>
+              <th>Terasa</th>
+              <th>Garaza ili parking</th>              
  			 </thead>
  			  
              <tbody>
@@ -410,7 +413,20 @@
                <td>{{s.lokacija}}</td>
                <td>{{s.kvadratura}}</td>
                <td>{{s.cenaEvri}}</td>
-               <td>{{s.vime}}</td>                            
+               <td>{{s.vime}}</td>     
+               {% if s.slobodan = 0 %}
+		            <td>Slobodan je!</td>
+		       {% else %}
+		            <td>Stan vise nije slobodan!</td>
+		       {% endif %}   
+		       {% if s.terasa = 0 %}
+		            <td>Ima</td>
+		       {% else %}
+		            <td>Nema</td>
+		       {% endif %}   
+		       <td>{{s.garazaParking}}</td>              
+               </tr>
+               {% endfor %}                       
                </tr>
                {% endfor %}
               

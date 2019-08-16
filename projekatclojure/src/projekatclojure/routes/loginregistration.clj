@@ -45,6 +45,8 @@
     (cond
       (not (login-validation? params))
       (get-login-page "Unesite svoj username i password")
+      (empty? user)
+      (get-login-page "Unesite kredencijale")
       :else
       (assoc (redirect "/userForma"):session (assoc session :identity user)))))
 
@@ -82,13 +84,13 @@
 (defn add-user-to-db [params]
   (-> (db/add-user (assoc params :rola "kupac"))))
 
-
-(defn registration-page-submit [{:keys [params session]}]
+(defn registration-page-submit [{:keys [params session]}]	
   (let [user (get-user-by-username-from-db params)]
     (cond
       (not (register-validaton? params))
       (get-registration-page "Potrebno je popuniti sva polja!")
-
+      (not-empty user)
+      (get-registration-page (str "Uneti kredencijali vec postoje!"))
       :else
       (assoc (redirect "/login"):session (assoc session :identity (add-user-to-db params))))))
 
@@ -114,7 +116,7 @@
 
 
 (defn vregistration-page-submit [{:keys [params session]}]
- (assoc (redirect "/vlogin"):session (assoc session :identity (add-vlasnik-to-db params))))
+     (assoc (redirect "/vlogin"):session (assoc session :identity (add-vlasnik-to-db params))))
 
 (defn get-useri [text]
   (if (or (nil? text)
