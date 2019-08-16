@@ -44,7 +44,8 @@
                {:title "Home"
                 :kupci (count (db/get-users))
                 :vlasnici (count (db/get-vlasnik))
-                :stanovi (count (db/get-stan))}))
+                :stanovi (count (db/get-stan))
+                :projekti (count (db/get-projekti))}))
 
 (defn home-page [session]
   (get-home-page "views/home.html" session))

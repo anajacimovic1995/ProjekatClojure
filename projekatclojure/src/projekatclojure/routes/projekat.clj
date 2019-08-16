@@ -75,13 +75,7 @@
 (defn add-projekat [{:keys [params session]}]
     (println params)
     (projekat-validation? params)
-    (let [file (get-picture-url params)]
-    (if-not (contains? params :url)
-      (->(assoc (:file params) :fname file))
-      (upload-picture))
-    (-> (dissoc (assoc params :slika file) :file :url)
-        (db/add-projekat params)
-        (:generated_key)))    
+    (db/add-projekat params)
     (redirect "/vlasnikForma"))
 
 (defn get-projekat-slika-from-db [params]

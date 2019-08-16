@@ -31,7 +31,7 @@
                                    :error error}))
 
 (defn get-user-by-username-from-db [params]
-  (-> (select-keys params [:password])
+  (-> (select-keys params [:username])
       (db/find-user)
       (first)))
 

@@ -363,6 +363,7 @@
 	                    tableData += "<td>" + data[i].kvadratura + "</td>";
 	                    tableData += "<td>" + data[i].cenaEvri + "</td>";
 	                    tableData += "<td>" + data[i].vime + "</td>";
+	                    tableData += "<td>" + data[i].opis + "</td>";
 	                    tableData += "<tr>";
 	                }
 	            }
@@ -382,7 +383,7 @@
 </head>
 <body>
 		<div class="header">
-		  <h1>Dobrodosao {{logged.imePrezime}}!</h1>
+		  <h1>Zdravo {{logged.imePrezime}}!</h1>
 		</div>
 		
 		<div class="navbar">
@@ -403,11 +404,13 @@
               <th>Vlasnik</th>
               <th>Slobodan</th>
               <th>Terasa</th>
-              <th>Garaza ili parking</th>              
+              <th>Garaza ili parking</th> 
+              <th>Opis</th>              
  			 </thead>
  			  
              <tbody>
               {% for s in stanovi %}
+              {% if s.prodavacID = logged.vlasnikID %}
                <tr id="{{s.stanID}}" onclick="getStan(this.id)" class="clickable-row">
                <td>{{s.stanID}}</td>
                <td>{{s.lokacija}}</td>
@@ -424,8 +427,10 @@
 		       {% else %}
 		            <td>Nema</td>
 		       {% endif %}   
-		       <td>{{s.garazaParking}}</td>              
+		       <td>{{s.garazaParking}}</td>   
+		       <td>{{s.opis}}</td>           
                </tr>
+               {% endif %}
                {% endfor %}
               
              </tbody>
