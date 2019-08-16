@@ -90,6 +90,8 @@
 
 (defroutes forme-routes
   (GET "/userForma" request (userforma (:session request)))
+  (POST "/userForma" request (userforma request))
   (GET "/vlasnikForma" request (vlasnikforma (:session request)))
+  (POST "/vlasnikForma" request (vlasnikforma request))
   (GET "/vlasnici" request (search-vlasnik request))
   (DELETE "/vlasnik/:vlasnikID" request (delete-vlasnik request)))
