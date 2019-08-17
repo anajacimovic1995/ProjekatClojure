@@ -48,12 +48,19 @@ As admin, you can search all apartments and projects by location, price or space
 ## Short Library Description
 
 Leiningen is a build automation and dependency management tool for Clojure projects. Leiningen script is available
-on the following link https://leiningen.org/. For execution of the web part of the application and requests is used Ring dependency.
-All objects used in the project should have routes for the pages that should be performed in the appliation.
+on the following link https://leiningen.org/. 
+
+For execution of the web part of the application and requests is used Ring dependency.
+
+All objects used in the project should have routes for the pages that should be performed in the application.
 For the implementation of these routes is used Compojure library. These files are in projectclojure/routes package.
+
 For the development of database schema is used Migratus library. We use it when we set up the database before running
-the project. Korma is the library used for handling SQL queries. In the file komunikacija.clj are all functions directly connected
+the project. 
+
+Korma is the library used for handling SQL queries. In the file komunikacija.clj are all functions directly connected
 to database. At the beginning of the file are imported requred libraries. One of them is Korma. Later in the file, it is used as 'k'.
+
 In all routes files are defined structured which are used in the implementation and database. For handling and validation
 of the structures is used Struct library.
 
