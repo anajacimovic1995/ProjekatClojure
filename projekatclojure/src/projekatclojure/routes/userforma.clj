@@ -47,6 +47,7 @@
     :else
     (get-userforma-page "views/userForma.html" session)))
 
+
 (defn get-vlasnikforma-page [page session]
   (render-file page
                {:title "Glavna forma vlasnika"

@@ -363,7 +363,18 @@
 	                    tableData += "<td>" + data[i].kvadratura + "</td>";
 	                    tableData += "<td>" + data[i].cenaEvri + "</td>";
 	                    tableData += "<td>" + data[i].vime + "</td>";
-	                    tableData += "<td>" + data[i].opis + "</td>";
+	                    if (data[i].slobodan == 0){
+	                       tableData +="<td>Slobodan je!</td>";
+	                    }else{
+					       tableData +="<td>Stan vise nije slobodan!</td>";
+	            		} 
+					    if (data[i].terasa == 0){
+					       tableData +="<td>Ima</td>";
+					    }else {
+					       tableData +="<td>Nema</td>";
+					    }
+					    tableData += "<td>" + data[i].garazaParking + "</td>";
+		                tableData += "<td>" + data[i].opis + "</td>";
 	                    tableData += "<tr>";
 	                }
 	            }
@@ -393,7 +404,11 @@
          <a href="/pretragaprojekata">Pregled projekata</a>                
          <a href="/vlogout" class="right">Izloguj se sa naloga</a>
 		</div>
+		<div> <p>U narednoj tabeli se nalaze stanovi koji su kreirani u prethodnom periodu.
+         Pretraga se vrsi prema lokaciji, kvadraturi i ceni.</p></div>     
+
       <div class="row">
+
            <input type="text" name="search" placeholder="Pretraga ..." onkeyup="searchStan(this.value);" autofocus/>
            <table id="table-stanovi" class="table">
             <thead>

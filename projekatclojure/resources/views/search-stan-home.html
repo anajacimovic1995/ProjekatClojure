@@ -341,6 +341,7 @@
 		
 		.cell {
 		  display: table-cell;
+		  
 		  padding: 10px;
 		}
 		
@@ -397,9 +398,19 @@ function searchStan(text) {
                     tableData += "<td>" + data[i].kvadratura + "</td>";
                     tableData += "<td>" + data[i].cenaEvri + "</td>";
                     tableData += "<td>" + data[i].vime + "</td>";
-                    tableData += "<td>" + data[i].slobodan + "</td>";
-                    tableData += "<td>" + data[i].terasa + "</td>";
-                    tableData += "<td>" + data[i].garazaParking + "</td>";
+                    if (data[i].slobodan == 0){
+	                       tableData +="<td>Slobodan je!</td>";
+	                    }else{
+					       tableData +="<td>Stan vise nije slobodan!</td>";
+	            		} 
+					    if (data[i].terasa == 0){
+					       tableData +="<td>Ima</td>";
+					    }else {
+					       tableData +="<td>Nema</td>";
+					    }
+		            
+                 tableData += "<td>" + data[i].garazaParking + "</td>";
+                 tableData += "<td>" + data[i].opis + "</td>";
                     tableData += "<tr>";
                 }
             }
@@ -425,6 +436,8 @@ function searchStan(text) {
 		  <a href="/login" class="right">Login kupca</a>
 		  <a href="/vlogin" class="right">Login vlasnika</a>
 		</div>
+		<div> <p>U narednoj tabeli se nalaze stanovi koji su kreirani u prethodnom periodu.
+         Pretraga se vrsi prema lokaciji, kvadraturi i ceni.</p></div>     
         <div class="row">
          <div class="col-lg-12">
          <br>
@@ -442,6 +455,7 @@ function searchStan(text) {
               <th>Slobodan</th>
               <th>Terasa</th>
               <th>Garaza ili parking</th>
+              <th>Opis</th>
              </thead>
              <tbody>
                {% for s in stanovi %}
@@ -461,7 +475,8 @@ function searchStan(text) {
 		       {% else %}
 		       <td>Nema</td>
 		       {% endif %}   
-		       <td>{{s.garazaParking}}</td>              
+		       <td>{{s.garazaParking}}</td> 
+		       <td>{{s.opis}}</td>              
                </tr>
                {% endfor %}
              </tbody>

@@ -91,6 +91,7 @@
           (k/join vlasnik (= :stan.prodavacID :vlasnik.vlasnikID))
           (k/where params)))
 
+
 (defn find-stan-by-id [id]
   (k/select stan
           (k/fields :* [:vlasnik.imePrezime :vime])
@@ -127,6 +128,7 @@
           (k/fields :* [:vlasnik.imePrezime :vime])
           (k/join vlasnik (= :projekat.investitorID :vlasnik.vlasnikID))
           (k/where params)))
+
 
 (defn get-text-search [text]
   (str "%" text "%"))
