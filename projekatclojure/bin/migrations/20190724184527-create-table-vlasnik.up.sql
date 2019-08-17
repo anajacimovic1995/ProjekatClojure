@@ -10,6 +10,7 @@ CREATE TABLE `vlasnik` (
 
 /*Data for the table `vlasnik` */
 
+
 insert  into `vlasnik`(`vlasnikID`,`imePrezime`,`adresa`,`kontakt`,`username`,`password`) values 
 (1,'Borivoje Boric','Pariske Komune','066665555','boki','123'),
 (2,'Bogdan Nisic','Steve Vargasa','067656565','boba','000'),
@@ -18,4 +19,5 @@ insert  into `vlasnik`(`vlasnikID`,`imePrezime`,`adresa`,`kontakt`,`username`,`p
 (6,'Sonja Soric','Bulevar Oslobodjenja','060090909','sonja','123'),
 (7,'Valentina Vasic','Dimitrija Tucovica','065454545','vale','123'),
 (8,'Ivana Kovacevic','Banovo Brdo','09988888','ivanakovacevic','123'),
-(9,'Ivana Mitrovic','Dimitrija Tucovica','061123456','ivanamitrovic','123');
+(9,'Ivana Mitrovic','Dimitrija Tucovica','061123456','ivanamitrovic','123'),
+(10,'Milos Jovanovic','Djeram ','065343434','milosjovanovic','123');

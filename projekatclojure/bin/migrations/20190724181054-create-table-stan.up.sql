@@ -14,7 +14,7 @@ CREATE TABLE `stan` (
   PRIMARY KEY (`stanID`),
   KEY `prodavacID` (`prodavacID`),
   CONSTRAINT `stan_ibfk_2` FOREIGN KEY (`prodavacID`) REFERENCES `vlasnik` (`vlasnikID`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 /*Data for the table `stan` */
 
@@ -27,5 +27,7 @@ insert  into `stan`(`stanID`,`link`,`sajt`,`kvadratura`,`cenaEvri`,`lokacija`,`s
 (20,'https://cityexpert.rs/prodaja/stan/36203/dvosoban-darinke-radovic-cukarica','cityexpert',56,53000,'Cukarica',0,1,'Garaza','https://img.cityexpert.rs/sites/default/files/styles/1920x/public/image/cityexpert.rs_-_nekretnina_id_-_36203_-_0730_-_20190809.jpg','Zgrada poseuje lift i interfon. Stan je na 11 spratu.',6),
 (21,'https://cityexpert.rs/prodaja/stan/35854/dvosoban-radoja-dakica-novi-beograd','cityexpert',43,75000,'Blok 7a, Novi Beograd',0,0,'Slobodan parking zgrade','https://img.cityexpert.rs/sites/default/files/styles/1920x/public/image/cityexpert.rs_-_nekretnina_id_-_35854_-_5604_-_20190711_0.jpg','Grejanje po potrosnji',4),
 (22,'https://cityexpert.rs/prodaja/stan/31220/cetvorosoban-gornjogradska-zemun','cityexpert',103,195000,'Zemun',0,0,'Bez garaze, slobodan parking','https://img.cityexpert.rs/sites/default/files/styles/1920x/public/image/cityexpert.rs_-_nekretnina_id_-_31220_-_7187_-_20190808.jpg','Visok infostan',4),
-(23,'https://cityexpert.rs/prodaja/stan/18140/dvosoban-jove-ilica-vozdovac','Cityexert',83,140000,'Vozdovac',0,0,'Garaza','https://img.cityexpert.rs/sites/default/files/styles/1920x/public/image/cityexpert.rs_-_nekretnina_id_-_18140_-_6150_-_20161007_0.jpg','Zgrada novije gradnje na Vozdovcu u ulici Jove Ilica .Ima površinu od 71m2 + terasu povrsine 12m2 koja je zastakljena. Stan se prodaje sa namestajem. ',2);
-
+(23,'https://cityexpert.rs/prodaja/stan/18140/dvosoban-jove-ilica-vozdovac','Cityexert',83,140000,'Vozdovac',0,0,'Garaza','https://img.cityexpert.rs/sites/default/files/styles/1920x/public/image/cityexpert.rs_-_nekretnina_id_-_18140_-_6150_-_20161007_0.jpg','Zgrada novije gradnje na Vozdovcu u ulici Jove Ilica .Ima površinu od 71m2 + terasu povrsine 12m2 koja je zastakljena. Stan se prodaje sa namestajem. ',2),
+(24,'https://www.lidernekretnine.rs/97680-lux-stanovi-u-izgradnji','lidernekretine',64,134000,'Cvetkova pijaca',0,1,'Parking mesto','https://lidernekretnine.rs/photos/148107920_1_20190115153721.jpg','U izgradnji, useljvo jul 2019, luksuzna gradnja, obavezna kupovina parking mesta, cena po jednom mestu je 9.600 sa pdv-om, cena stana je sa pdv-om. odli?na lokacija, povuceni sprat.',10),
+(25,'https://www.lidernekretnine.rs/101776-luksuzan-stan-sa-pogledom-na-reku-i-adu-ciganliju','lidernekretnine',82,295000,'Beograd na vodi',0,0,'Garaza','https://lidernekretnine.rs/photos/148110236_12_20190815193750.jpg','Luksuzan stan sa pogledom na reku i Adu Ciganliju. Stan je svetao, funkcionalan i pre svega odli?no pozicioniran. Dnevno trpezarijski prostor je otvoren i povezan sa lodjom i pruža divan pogled. ',10),
+(26,'https://sakurapark.rs/dvosoban-stan-u4-01-v1/','sakurapark.rs',49.9,100000,'Novi Beograd',0,0,'Oba','https://sakurapark.rs/wp-content/uploads/2018/08/U4.01-v2-1920x1920.jpg','Od 2. do 10. nivoa spratnosti postoji po jedan ovakav stan.',10);
